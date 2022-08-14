@@ -24,8 +24,30 @@ const skills = document.getElementById(`skills`);
 window.addEventListener(`scroll`, (e) => {
   if (isScrolledIntoView(skills)) {
     const fills = document.querySelectorAll(`.fill`);
-    fills.forEach(fill =>{
-      fill.style.width = fill.dataset.width
+    fills.forEach(fill => {
+      fill.style.width = fill.dataset.width;
     });
   }
+});
+
+/* shuffle button */
+const shuffleBtn = document.getElementById(`shuffle`);
+function shuffle(items) {
+  let currentIndex = items.length, randomIndex;
+  while (currentIndex != 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+    [items[currentIndex], items[randomIndex]] = [
+      items[randomIndex], items[currentIndex]];
+  }
+  return items;
+}
+shuffleBtn.addEventListener(`click`, () => {
+  const items = [...document.getElementById(`shuffledElements`).children];
+  const shuffledElements = shuffle(items);
+  let res = ``;
+  shuffledElements.forEach(e => {
+    res += e.outerHTML;
+  });
+  document.getElementById(`shuffledElements`).innerHTML = res;
 });
