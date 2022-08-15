@@ -17,10 +17,11 @@
   --main-padding-bottom: 100px;
 }
 
-html {
-  scroll-behavior: smooth;
+@supports (scroll-behavior: smooth) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
-
 body {
   font-family: "Cairo", sans-serif;
 }
@@ -29,8 +30,8 @@ a {
   text-decoration: none;
 }
 
-ul {
-  list-style-type: none;
+menu {
+  list-style: none;
 }
 
 .container {
@@ -64,7 +65,7 @@ ul {
   margin: 0 auto 80px;
   border: 2px solid black;
   padding: 10px 20px;
-  font-size: clamp(16px, 2vw, 30px);
+  font-size: clamp(16px, 5vw, 30px);
   width: -moz-fit-content;
   width: -webkit-fit-content;
   width: fit-content;
@@ -138,18 +139,45 @@ ul {
 
 img {
   max-width: 100%;
+  min-width: 20px;
+  min-height: 20px;
+}
+
+.spikes {
+  position: relative;
+  background: #2c3e50;
+}
+.spikes::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  left: 0%;
+  top: 100%;
+  display: block;
+  height: 50px;
+  background-size: 50px 100%;
+  background-image: linear-gradient(135deg, #fff 25%, transparent 25%), linear-gradient(225deg, #fff 25%, transparent 25%);
+  background-position: 0 0;
 }
 
 header {
   position: relative;
-  box-shadow: 0 0 20px #ddd;
+  box-shadow: 0 0 10px #ddd;
   background: #fff;
+  border-bottom: 1px solid #ddd;
+  z-index: 1;
+}
+header.fixed {
+  position: fixed;
+  z-index: 3;
+  width: 100%;
 }
 header .container {
   position: relative;
 }
 header .container .logo {
   color: var(--main-clr);
+  cursor: pointer;
   font-size: 26px;
   height: 50px;
   font-weight: bold;
@@ -201,6 +229,7 @@ header .container .links a {
 header .container .mega-menu {
   z-index: -1;
   opacity: 0;
+  pointer-events: none;
   top: calc(100% + 30px);
   position: absolute;
   background: #fff;
@@ -222,13 +251,13 @@ header .container .mega-menu .img img {
   max-height: 100%;
   width: 100%;
 }
-header .container .mega-menu ul {
+header .container .mega-menu menu {
   cursor: pointer;
 }
-header .container .mega-menu ul li:not(:last-child) {
+header .container .mega-menu menu li:not(:last-child) {
   border-bottom: 1px solid #e9e6e6;
 }
-header .container .mega-menu ul li a {
+header .container .mega-menu menu li a {
   padding: 15px;
   height: 50px;
   color: var(--main-clr);
@@ -237,13 +266,14 @@ header .container .mega-menu ul li a {
   display: block;
   padding-bottom: 36px;
 }
-header .container .mega-menu ul li a i {
+header .container .mega-menu menu li a i {
   margin-right: 10px;
 }
 header .container .mega-menu-active {
   z-index: 1;
   opacity: 1;
   top: 100%;
+  pointer-events: all;
 }
 @media (min-width: 768px) {
   header .container {
@@ -274,7 +304,7 @@ header .container .mega-menu-active {
   header .container .mega-menu > * {
     width: 100%;
   }
-  header .container .mega-menu ul li {
+  header .container .mega-menu menu li {
     width: 100%;
   }
 }
@@ -293,6 +323,17 @@ header .container .mega-menu-active {
   background: var(--section-bg);
   height: calc(100vh - 72px);
   position: relative;
+  overflow: hidden;
+}
+.landing::after {
+  position: absolute;
+  content: "";
+  left: -100%;
+  right: -100%;
+  bottom: -100px;
+  height: 230px;
+  transform: rotate(-6deg);
+  background: #fff;
 }
 .landing .container {
   height: 100%;
@@ -302,7 +343,6 @@ header .container .mega-menu-active {
   padding-bottom: 120px;
   height: 100%;
   text-align: center;
-  position: relative;
 }
 .landing .container > * {
   width: 100%;
@@ -327,9 +367,9 @@ header .container .mega-menu-active {
 }
 .landing .container .img {
   display: none;
+  min-width: 600px;
 }
 .landing .container .img img {
-  width: 600px;
   position: relative;
   -webkit-animation: up-and-down 5s linear infinite;
           animation: up-and-down 5s linear infinite;
@@ -357,6 +397,7 @@ header .container .mega-menu-active {
   left: 50%;
   transform: translateX(-50%);
   transition: var(--main-transition);
+  z-index: 1;
 }
 .landing .container .go-down i {
   -webkit-animation: bouncing 1.5s infinite;
@@ -393,6 +434,7 @@ header .container .mega-menu-active {
     justify-content: start;
   }
   .landing .container .text {
+    align-items: flex-start;
     text-align: left;
   }
   .landing .container .text h1 {
@@ -544,6 +586,7 @@ header .container .mega-menu-active {
 .features {
   padding-top: var(--main-padding-top);
   padding-bottom: var(--main-padding-bottom);
+  overflow: hidden;
 }
 .features .container {
   display: grid;
@@ -556,6 +599,7 @@ header .container .mega-menu-active {
   height: -webkit-min-content;
   height: -moz-min-content;
   height: min-content;
+  transition: var(--main-transition);
 }
 .features .container .box .img-holder {
   position: relative;
@@ -694,6 +738,7 @@ header .container .mega-menu-active {
   background-color: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.07);
   border-radius: 6px;
+  transition: var(--main-transition);
 }
 .testimonials .container .box img {
   position: absolute;
@@ -734,6 +779,7 @@ header .container .mega-menu-active {
 .team .container .box {
   padding-top: 60px;
   position: relative;
+  transition: var(--main-transition);
 }
 .team .container .box .data {
   display: flex;
@@ -809,12 +855,54 @@ header .container .mega-menu-active {
   gap: 40px;
 }
 .services .container .box {
-  text-align: center;
-  background-color: white;
-  box-shadow: 0 12px 20px 0 rgba(0, 0, 0, 0.13), 0 2px 4px 0 rgba(0, 0, 0, 0.12);
   counter-increment: services;
-  transition: var(--main-transition);
   position: relative;
+}
+.services .container .box .cover {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+.services .container .box .cover::before, .services .container .box .cover::after {
+  position: absolute;
+  content: "";
+  z-index: 2;
+  right: 0;
+  left: 0;
+  transition: var(--main-transition);
+  background-color: #ddd;
+}
+.services .container .box .cover::before {
+  top: 0;
+  bottom: 50%;
+}
+.services .container .box .cover::after {
+  top: 50%;
+  bottom: 0;
+}
+.services .container .box .cover-removed::before {
+  bottom: 100%;
+}
+.services .container .box .cover-removed::after {
+  top: 100%;
+}
+.services .container .box .wrapper {
+  padding-top: 1px;
+  background-color: white;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 12px 20px 0 rgba(0, 0, 0, 0.13), 0 2px 4px 0 rgba(0, 0, 0, 0.12);
+}
+.services .container .box .wrapper::before {
+  position: absolute;
+  content: "";
+  left: 0;
+  top: 0;
+  height: 3px;
+  width: 100%;
+  background: var(--main-clr);
+  transition: var(--main-transition);
+  transform: scaleX(0);
 }
 .services .container .box i {
   margin: 30px auto 20px;
@@ -842,8 +930,7 @@ header .container .mega-menu-active {
   top: 0;
   left: 0;
   height: 100%;
-  width: 80px;
-  padding-left: 5px;
+  width: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -851,33 +938,24 @@ header .container .mega-menu-active {
   color: #fff;
   font-size: 30px;
   font-weight: bold;
+  padding-right: 15px;
 }
 .services .container .box .info::before {
   position: absolute;
   content: "";
   top: 0;
-  left: 60px;
+  left: 80px;
   height: 100%;
-  width: 75px;
+  width: 50px;
   transform: skew(-25deg);
-  background: linear-gradient(90deg, var(--main-clr) 0 50%, #d5d5d5 50%);
+  background: #d5d5d5;
+  z-index: 1;
 }
-.services .container .box::before {
-  position: absolute;
-  content: "";
-  left: 0;
-  top: 0;
-  height: 3px;
-  width: 100%;
-  background: var(--main-clr);
-  transition: var(--main-transition);
-  transform: scaleX(0);
-}
-.services .container .box:hover {
-  transform: translateY(-10px);
-}
-.services .container .box:hover::before {
+.services .container .box:hover .wrapper::before {
   transform: scaleX(1);
+}
+.services .container .box:hover .wrapper {
+  transform: translateY(-10px);
 }
 
 .skills {
@@ -947,10 +1025,9 @@ header .container .mega-menu-active {
 .how-it-works .container .img {
   text-align: center;
   width: 100%;
-  margin-bottom: 50px;
 }
 .how-it-works .container .img img {
-  max-width: 100%;
+  margin-bottom: 50px;
 }
 .how-it-works .container .box {
   text-align: center;
@@ -1011,6 +1088,8 @@ header .container .mega-menu-active {
   }
   .how-it-works .container .img img {
     margin-right: 100px;
+    max-width: none;
+    margin-bottom: 0;
   }
 }
 
@@ -1113,10 +1192,12 @@ header .container .mega-menu-active {
   color: #777;
 }
 .events .container .subscribe {
-  padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 20px;
+  padding: 20px;
+  background-color: #f6f5f5;
+  border-radius: 50px;
 }
 .events .container .subscribe [type=email] {
   padding: 20px;
@@ -1134,6 +1215,7 @@ header .container .mega-menu-active {
   padding: 20px;
   cursor: pointer;
   transition: var(--main-transition);
+  border-radius: 50px;
 }
 .events .container .subscribe [type=submit]:hover {
   background-color: var(--main-clr-alt);
@@ -1145,7 +1227,6 @@ header .container .mega-menu-active {
     flex-direction: row;
   }
   .events .container .subscribe [type=submit] {
-    border-radius: 50px;
     border: none;
     background-color: var(--main-clr);
     color: white;
@@ -1196,6 +1277,32 @@ header .container .mega-menu-active {
   transition: var(--main-transition);
   background: white;
   text-align: center;
+  z-index: 1;
+}
+.plans .container .box::before, .plans .container .box::after {
+  position: absolute;
+  content: "";
+  background: #dce1fa;
+  z-index: -1;
+  transition: var(--main-transition);
+}
+.plans .container .box::before {
+  top: 50%;
+  right: 0;
+  left: 100%;
+  bottom: 0;
+}
+.plans .container .box::after {
+  bottom: 50%;
+  top: 0;
+  right: 100%;
+  left: 0;
+}
+.plans .container .box:hover::after {
+  right: 0;
+}
+.plans .container .box:hover::before {
+  left: 0;
 }
 .plans .container .box h3 {
   font-weight: bold;
@@ -1217,7 +1324,7 @@ header .container .mega-menu-active {
 .plans .container .box .time {
   color: #777;
 }
-.plans .container .box ul {
+.plans .container .box menu {
   text-align: left;
   padding-top: 20px;
 }
@@ -1249,8 +1356,8 @@ header .container .mega-menu-active {
   color: #fff;
   background-color: var(--main-clr);
 }
-.plans .container .box.popular {
-  transform: translateY(-20px);
+.plans .container .box.popular:hover .label::after {
+  border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) #dce1fa rgba(0, 0, 0, 0);
 }
 .plans .container .box .label {
   position: absolute;
@@ -1270,8 +1377,14 @@ header .container .mega-menu-active {
   content: "";
   border: 20px solid;
   border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) #fff rgba(0, 0, 0, 0);
+  transition: border-color var(--main-transition);
   bottom: 0;
   left: 0;
+}
+@media (min-width: 993px) {
+  .plans .container .box.popular {
+    transform: translateY(-20px);
+  }
 }
 
 .videos {
@@ -1332,6 +1445,14 @@ header .container .mega-menu-active {
 .videos .right p {
   padding: 20px;
   background-color: white;
+}
+.videos .right .description {
+  max-height: 90px;
+  height: -webkit-min-content;
+  height: -moz-min-content;
+  height: min-content;
+  overflow-y: scroll;
+  outline-color: var(--main-clr-alt);
 }
 @media (min-width: 992px) {
   .videos .wrapper {
@@ -1502,7 +1623,7 @@ header .container .mega-menu-active {
 .discount .right * {
   outline: none;
   width: 100%;
-  min-width: 320px;
+  min-width: 250px;
 }
 .discount .right input:not([type=submit]),
 .discount .right textarea {

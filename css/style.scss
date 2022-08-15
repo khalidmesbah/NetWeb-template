@@ -18,8 +18,10 @@
   --main-padding-top: 100px;
   --main-padding-bottom: 100px;
 }
-html {
-  scroll-behavior: smooth;
+@supports (scroll-behavior: smooth) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 body {
   font-family: "Cairo", sans-serif;
@@ -27,8 +29,8 @@ body {
 a {
   text-decoration: none;
 }
-ul {
-  list-style-type: none;
+menu{
+  list-style: none ;
 }
 .container {
   padding-left: 15px;
@@ -60,7 +62,7 @@ ul {
   margin: 0 auto 80px;
   border: 2px solid black;
   padding: 10px 20px;
-  font-size: clamp(16px, 2vw, 30px);
+  font-size: clamp(16px, 5vw, 30px);
   width: -moz-fit-content;
   width: fit-content;
   position: relative;
@@ -116,17 +118,45 @@ ul {
 
 img {
   max-width: 100%;
+  min-width: 20px;
+  min-height: 20px;
+}
+
+.spikes {
+  position: relative;
+  background: #2c3e50;
+  &::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    left: -0%;
+    top: 100%;
+    display: block;
+    height: 50px;
+    background-size: 50px 100%;
+    background-image: linear-gradient(135deg, #fff 25%, transparent 25%),
+      linear-gradient(225deg, #fff 25%, transparent 25%);
+    background-position: 0 0;
+  }
 }
 
 // Start Header-----------------------------
 header {
   position: relative;
-  box-shadow: 0 0 20px #ddd;
+  box-shadow: 0 0 10px #ddd;
   background: #fff;
+  border-bottom: 1px solid #ddd;
+  z-index: 1;
+  &.fixed {
+    position: fixed;
+    z-index: 3;
+    width: 100%;
+  }
   .container {
     position: relative;
     .logo {
       color: var(--main-clr);
+      cursor: pointer;
       font-size: 26px;
       height: 50px;
       font-weight: bold;
@@ -178,6 +208,7 @@ header {
     .mega-menu {
       z-index: -1;
       opacity: 0;
+      pointer-events: none;
       top: calc(100% + 30px);
       .img {
         min-width: 330px;
@@ -198,7 +229,7 @@ header {
       border-bottom: 3px solid var(--main-clr-alt);
       border-top: 1px solid #e9e6e6;
       transition: top var(--main-transition), opacity var(--main-transition);
-      ul {
+      menu {
         cursor: pointer;
         li {
           &:not(:last-child) {
@@ -222,6 +253,7 @@ header {
         z-index: 1;
         opacity: 1;
         top: 100%;
+        pointer-events: all;
       }
     }
   }
@@ -252,7 +284,7 @@ header {
         & > * {
           width: 100%;
         }
-        ul li {
+        menu li {
           width: 100%;
         }
       }
@@ -274,6 +306,17 @@ header {
   background: var(--section-bg);
   height: calc(100vh - 72px);
   position: relative;
+  overflow: hidden;
+  &::after {
+    position: absolute;
+    content: "";
+    left: -100%;
+    right: -100%;
+    bottom: -100px;
+    height: 230px;
+    transform: rotate(-6deg);
+    background: #fff;
+  }
   .container {
     height: 100%;
     display: flex;
@@ -282,7 +325,6 @@ header {
     padding-bottom: 120px;
     height: 100%;
     text-align: center;
-    position: relative;
     & > * {
       width: 100%;
     }
@@ -306,8 +348,8 @@ header {
     }
     .img {
       display: none;
+      min-width: 600px;
       img {
-        width: 600px;
         position: relative;
         animation: up-and-down 5s linear infinite;
       }
@@ -328,6 +370,7 @@ header {
       left: 50%;
       transform: translateX(-50%);
       transition: var(--main-transition);
+      z-index: 1;
       i {
         animation: bouncing 1.5s infinite;
         @keyframes bouncing {
@@ -364,6 +407,7 @@ header {
     justify-content: start;
   }
   .landing .container .text {
+    align-items: flex-start;
     text-align: left;
     h1 {
       margin-bottom: 0;
@@ -419,8 +463,6 @@ header {
         a:active {
           color: inherit;
           font-weight: bold;
-        }
-        i {
         }
       }
       &:hover {
@@ -501,6 +543,7 @@ header {
 .features {
   padding-top: var(--main-padding-top);
   padding-bottom: var(--main-padding-bottom);
+  overflow: hidden;
   .container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -509,6 +552,7 @@ header {
       text-align: center;
       border: 1px solid #ccc;
       height: min-content;
+      transition: var(--main-transition);
       .img-holder {
         position: relative;
         clip-path: polygon(0 0, 100% 0%, 100% 53%, 0% 87%);
@@ -650,6 +694,7 @@ header {
       background-color: white;
       box-shadow: 0 2px 4px rgb(0 0 0 / 7%);
       border-radius: 6px;
+      transition: var(--main-transition);
       img {
         position: absolute;
         right: -10px;
@@ -689,6 +734,7 @@ header {
     .box {
       padding-top: 60px;
       position: relative;
+      transition: var(--main-transition);
       .data {
         display: flex;
         .links {
@@ -765,12 +811,57 @@ header {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 40px;
     .box {
-      text-align: center;
-      background-color: white;
-      box-shadow: 0 12px 20px 0 rgb(0 0 0 / 13%), 0 2px 4px 0 rgb(0 0 0 / 12%);
       counter-increment: services;
-      transition: var(--main-transition);
       position: relative;
+      .cover {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        &::before,
+        &::after {
+          position: absolute;
+          content: "";
+          z-index: 2;
+          right: 0;
+          left: 0;
+          transition: var(--main-transition);
+          background-color: #ddd;
+        }
+        &::before {
+          top: 0;
+          bottom: 50%;
+        }
+        &::after {
+          top: 50%;
+          bottom: 0;
+        }
+      }
+      .cover-removed {
+        &::before {
+          bottom: 100%;
+        }
+        &::after {
+          top: 100%;
+        }
+      }
+      .wrapper {
+        padding-top: 1px;
+        background-color: white;
+        text-align: center;
+        position: relative;
+        box-shadow: 0 12px 20px 0 rgb(0 0 0 / 13%), 0 2px 4px 0 rgb(0 0 0 / 12%);
+        &::before {
+          position: absolute;
+          content: "";
+          left: 0;
+          top: 0;
+          height: 3px;
+          width: 100%;
+          background: var(--main-clr);
+          transition: var(--main-transition);
+          transform: scaleX(0);
+        }
+      }
       i {
         margin: 30px auto 20px;
         display: block;
@@ -796,8 +887,7 @@ header {
           top: 0;
           left: 0;
           height: 100%;
-          width: 80px;
-          padding-left: 5px;
+          width: 100px;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -805,38 +895,27 @@ header {
           color: #fff;
           font-size: 30px;
           font-weight: bold;
+          padding-right: 15px;
         }
         &::before {
           position: absolute;
           content: "";
           top: 0;
-          left: 60px;
+          left: 80px;
           height: 100%;
-          width: 75px;
+          width: 50px;
           transform: skew(-25deg);
-          background: linear-gradient(
-            90deg,
-            var(--main-clr) 0 50%,
-            #d5d5d5 50%
-          );
+          background: #d5d5d5;
+          z-index: 1;
         }
-      }
-      &::before {
-        position: absolute;
-        content: "";
-        left: 0;
-        top: 0;
-        height: 3px;
-        width: 100%;
-        background: var(--main-clr);
-        transition: var(--main-transition);
-        transform: scaleX(0);
       }
       &:hover {
-        &::before {
+        .wrapper::before {
           transform: scaleX(1);
         }
-        transform: translateY(-10px);
+        .wrapper {
+          transform: translateY(-10px);
+        }
       }
     }
   }
@@ -881,7 +960,6 @@ header {
           width: 0;
           height: 100%;
           background-color: var(--main-clr);
-          // transition: var(--main-transition);
           transition: width 0.5s linear;
         }
       }
@@ -908,9 +986,8 @@ header {
     .img {
       text-align: center;
       width: 100%;
-      margin-bottom: 50px;
       img {
-        max-width: 100%;
+        margin-bottom: 50px;
       }
     }
     .box {
@@ -972,6 +1049,8 @@ header {
       align-items: center;
       .img img {
         margin-right: 100px;
+        max-width: none;
+        margin-bottom: 0;
       }
     }
   }
@@ -1072,11 +1151,12 @@ header {
       color: #777;
     }
     .subscribe {
-      padding: 20px;
       display: flex;
       flex-direction: column;
       gap: 20px;
-
+      padding: 20px;
+      background-color: #f6f5f5;
+      border-radius: 50px;
       [type="email"] {
         padding: 20px;
         border-radius: 50px;
@@ -1093,6 +1173,7 @@ header {
         padding: 20px;
         cursor: pointer;
         transition: var(--main-transition);
+        border-radius: 50px;
         &:hover {
           background-color: var(--main-clr-alt);
         }
@@ -1104,7 +1185,6 @@ header {
         margin: 50px auto 0;
         flex-direction: row;
         [type="submit"] {
-          border-radius: 50px;
           border: none;
           background-color: var(--main-clr);
           color: white;
@@ -1156,6 +1236,35 @@ header {
       transition: var(--main-transition);
       background: white;
       text-align: center;
+      z-index: 1;
+      &::before,
+      &::after {
+        position: absolute;
+        content: "";
+        background: #dce1fa;
+        z-index: -1;
+        transition: var(--main-transition);
+      }
+      &::before {
+        top: 50%;
+        right: 0;
+        left: 100%;
+        bottom: 0;
+      }
+      &::after {
+        bottom: 50%;
+        top: 0;
+        right: 100%;
+        left: 0;
+      }
+      &:hover {
+        &::after {
+          right: 0;
+        }
+        &::before {
+          left: 0;
+        }
+      }
       h3 {
         font-weight: bold;
         margin: 30px 0;
@@ -1176,7 +1285,7 @@ header {
       .time {
         color: #777;
       }
-      ul {
+      menu {
         text-align: left;
         padding-top: 20px;
       }
@@ -1208,7 +1317,9 @@ header {
         }
       }
       &.popular {
-        transform: translateY(-20px);
+        &:hover .label::after {
+          border-color: #0000 #0000 #dce1fa #0000;
+        }
       }
       .label {
         position: absolute;
@@ -1226,9 +1337,15 @@ header {
           content: "";
           border: 20px solid;
           border-color: #0000 #0000 #fff #0000;
+          transition: border-color var(--main-transition);
           bottom: 0;
           left: 0;
         }
+      }
+    }
+    @media (min-width: 993px) {
+      .box.popular {
+        transform: translateY(-20px);
       }
     }
   }
@@ -1289,6 +1406,12 @@ header {
     p {
       padding: 20px;
       background-color: white;
+    }
+    .description {
+      max-height: 90px;
+      height: min-content;
+      overflow-y: scroll;
+      outline-color: var(--main-clr-alt);
     }
   }
   @media (min-width: 992px) {
@@ -1457,7 +1580,7 @@ header {
     * {
       outline: none;
       width: 100%;
-      min-width: 320px;
+      min-width: 250px;
     }
     input:not([type="submit"]),
     textarea {
