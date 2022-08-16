@@ -12,19 +12,28 @@ NetWeb Is Tech Company That Makes The Internet A Better Place
 - Shuffle Elements
 - Smooth Scrolling
 - Intersection Observer
-- Lazy Loading
-- Supports Accessibility
-- Supports SEO
+- Lazy Loading For Images
+- 96% Accessibility
+- 100% SEO
+- 100% Performance
+- 100% Best Practices
 - Fully Responsive, Mobile First Approach
 - Scroll To Top When logo Is Clicked
 - Increase Numbers On Scrolling
+- Semantic HTML
+- PWA
+- 
 
 # Technologies
 - HTML
 - CSS
-- SCSS
+- SASS
 - JavaScript
 - Font Awesome
 - Normalize.css
+
+minify the css again
+
+> ### Credit For [Elzero Web School](https://elzero.org/)
 
 

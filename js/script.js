@@ -25,7 +25,7 @@ const skillsObserver = new IntersectionObserver(entries => {
 }, { threshold: 1 });
 skills.forEach(skill => skillsObserver.observe(skill));
 
-/* Shuffle Button */
+/* Shuffle Videos */
 const shuffleBtn = document.getElementById(`shuffle`);
 shuffleBtn.addEventListener(`click`, () => {
   const shuffledElements = (() => {
@@ -42,7 +42,24 @@ shuffleBtn.addEventListener(`click`, () => {
   let res = ``;
   shuffledElements.forEach(e => res += e.outerHTML);
   document.getElementById(`shuffledElements`).innerHTML = res;
+  activateEventListenersForVideos();
 });
+
+/* Run The Video When If Clicked */
+const activateEventListenersForVideos = () => {
+  const videos = document.querySelectorAll(`[name="video"]`);
+  const youtubeVideoPlayer = document.getElementById(`youtube-video-player`);
+  const description = document.getElementById(`video-description`);
+  videos.forEach(video => video.addEventListener(`click`, () => {
+    if (youtubeVideoPlayer.classList.contains(`disabled`)) {
+      const image =youtubeVideoPlayer.previousElementSibling.style.display = `none`
+      youtubeVideoPlayer.classList.remove(`disabled`);
+    }
+    youtubeVideoPlayer.src = video.dataset.src;
+    description.textContent = video.querySelector(`.des`).textContent;
+  }));
+};
+activateEventListenersForVideos();
 
 /* Countdown Timer */
 const lastSecondOfTheYear = new Date(`Dec 31, ${new Date().getFullYear()} 23:59:59`).getTime();
@@ -97,13 +114,6 @@ window.addEventListener(`scroll`, (e) => {
   }
 });
 
-/* Scroll To Top When logo Is clicked */
-const logo = document.getElementById(`logo`);
-logo.addEventListener(`click`, () => {
-  window.location.hash = `#`;
-  window.scrollTo(0, 0);
-});
-
 /* Events Dynamic Date */
 const eventDate = document.getElementById(`event-date`);
 eventDate.textContent = `Tech Masters Event ${new Date().getFullYear() + 1}`;
@@ -135,26 +145,27 @@ features.forEach(feature => {
 /* Testimonials & team Sections Animation */
 const testimonials = document.querySelectorAll(`#testimonials .box`);
 const teams = document.querySelectorAll(`#team .box`);
-const animate = (testimonial) => {
-  testimonial.style.transform = `translateY(20px)`;
-  testimonial.style.opacity = `0.2`;
+const animate = (element) => {
+  element.style.transform = `translateY(20px)`;
+  element.style.opacity = `0.2`;
 };
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
+    const e = entry.target.querySelector(`.wrapper`);
     if (!entry.isIntersecting) {
-      animate(entry.target);
+      animate(e);
       return;
     }
-    entry.target.style.transform = `translateY(0)`;
-    entry.target.style.opacity = `1`;
+    e.style.transform = `translateY(0)`;
+    e.style.opacity = `1`;
   });
-}, { threshold: 1 });
+}, { threshold: .5 });
 testimonials.forEach(testimonial => {
-  animate(testimonial);
+  animate(testimonial.querySelector(`.wrapper`));
   observer.observe(testimonial);
 });
 teams.forEach(team => {
-  animate(team);
+  animate(team.querySelector(`.wrapper`));
   observer.observe(team);
 });
 
@@ -171,7 +182,7 @@ const servicesObserver = new IntersectionObserver(entries => {
     }
     entry.target.querySelector(`.cover`).classList.add(`cover-removed`);
   });
-}, { threshold: 1 });
+}, { threshold: .5 });
 services.forEach(service => {
   animateServices(service);
   servicesObserver.observe(service);
@@ -182,6 +193,7 @@ services.forEach(service => {
 const lazyLoadObserver = new IntersectionObserver(entries => {
   entries.forEach(async entry => {
     if (!entry.isIntersecting) return;
+    lazyLoadObserver.unobserve(entry.target);
     const res = await fetch(entry.target.dataset.src);
     const blob = await res.blob();
     entry.target.src = URL.createObjectURL(blob);
@@ -190,5 +202,72 @@ const lazyLoadObserver = new IntersectionObserver(entries => {
 [...document.images].forEach(image => lazyLoadObserver.observe(image));
 
 /* Accessibility */
-document.querySelectorAll(`#testimonials`).forEach(testimonial => testimonial.setAttribute(`aria-hidden`,`true`));
+document.querySelectorAll(`#testimonials`).forEach(testimonial => testimonial.setAttribute(`aria-hidden`, `true`));
 document.body.querySelectorAll(`*`).forEach(e => e.lang = `en`);
+
+/* Gallery Sections Animation */
+const galleries = document.querySelectorAll(`#gallery .box`);
+const animateGallery = (gallery) => {
+  gallery.style.transform = `translateX(-50px)`;
+  gallery.style.opacity = `.5`;
+};
+const galleryObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    const el = entry.target.querySelector(`.wrapper`);
+    if (!entry.isIntersecting) {
+      animateGallery(el);
+      return;
+    }
+    el.style.transform = `none`;
+    el.style.opacity = `1`;
+  });
+}, { threshold: 0.5 });
+galleries.forEach(gallery => galleryObserver.observe(gallery));
+
+/* Articles Sections Animation */
+const articles = document.querySelectorAll(`#articles .box`);
+const animateArticle = (article) => {
+  article.style.transform = `translateX(50px)`;
+  article.style.opacity = `.5`;
+};
+const articleObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    const el = entry.target.querySelector(`.wrapper`);
+    if (!entry.isIntersecting) {
+      animateArticle(el);
+      return;
+    }
+    el.style.removeProperty(`transform`)
+    el.style.opacity = `1`;
+  });
+}, { threshold: 0.5 });
+
+articles.forEach(article => articleObserver.observe(article));
+/* Pricing Plans Sections Animation */
+const plans = document.querySelectorAll(`#plans .box`);
+const animatePlan = (plan) => {
+  if (plan.classList.contains(`basic`)) plan.style.transform = `translateX(-200px)`;
+  else if (plan.classList.contains(`advanced`)) plan.style.setProperty(`transform`, `translateY(100px)`);
+  else if (plan.classList.contains(`professional`)) plan.style.transform = `translateX(200px)`;
+};
+const plansObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    const el = entry.target.querySelector(`.wrapper`);
+    if (!entry.isIntersecting) {
+      animatePlan(el);
+      return;
+    }
+    if (el.classList.contains(`popular`)) {
+      el.style.removeProperty(`transform`);
+      return;
+    }
+    el.style.transform = `none`;
+  });
+}, {
+  threshold: 0.2,
+  rootMargin: `100px`
+});
+plans.forEach(plan => {
+  animatePlan(plan);
+  plansObserver.observe(plan);
+});

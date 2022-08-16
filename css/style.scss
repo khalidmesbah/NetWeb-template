@@ -1,4 +1,10 @@
-// Start Global Rules-----------------------------
+/* Variables */
+$main-clr: #2196f3;
+$main-clr-alt: #1787e0;
+$section-bg: #ececec;
+$main-transition: 300ms;
+$main-padding: 100px;
+/* Global Rules */
 *,
 *::before,
 *::after {
@@ -8,15 +14,24 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-:root {
-  --main-clr: #2196f3;
-  --main-clr-alt: #1787e0;
-  --main-transition: 300ms;
-  --main-padding-top: 100px;
-  --main-padding-bottom: 100px;
-  --section-bg: #ececec;
-  --main-padding-top: 100px;
-  --main-padding-bottom: 100px;
+@mixin section-padding {
+  padding-top: $main-padding;
+  padding-bottom: $main-padding;
+}
+@mixin grid-fill {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 40px;
+}
+@mixin grid-fit {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
+}
+@mixin center-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 @supports (scroll-behavior: smooth) {
   html {
@@ -29,8 +44,8 @@ body {
 a {
   text-decoration: none;
 }
-menu{
-  list-style: none ;
+menu {
+  list-style: none;
 }
 .container {
   padding-left: 15px;
@@ -67,13 +82,13 @@ menu{
   width: fit-content;
   position: relative;
   z-index: 1;
-  transition: var(--main-transition);
+  transition: $main-transition;
   &::before,
   &::after {
     content: "";
     width: 12px;
     height: 12px;
-    background-color: var(--main-clr);
+    background-color: $main-clr;
     position: absolute;
     border-radius: 50%;
     top: 50%;
@@ -100,7 +115,7 @@ menu{
   }
   @keyframes right-move {
     to {
-      width: 50%;
+      width: 55%;
       height: 100%;
       border-radius: inherit;
       right: 0;
@@ -108,20 +123,18 @@ menu{
   }
   @keyframes left-move {
     to {
-      width: 50%;
+      width: 55%;
       height: 100%;
       border-radius: inherit;
       left: 0;
     }
   }
 }
-
 img {
   max-width: 100%;
   min-width: 20px;
   min-height: 20px;
 }
-
 .spikes {
   position: relative;
   background: #2c3e50;
@@ -139,8 +152,7 @@ img {
     background-position: 0 0;
   }
 }
-
-// Start Header-----------------------------
+/* Header */
 header {
   position: relative;
   box-shadow: 0 0 10px #ddd;
@@ -155,14 +167,12 @@ header {
   .container {
     position: relative;
     .logo {
-      color: var(--main-clr);
+      color: $main-clr;
       cursor: pointer;
       font-size: 26px;
       height: 50px;
       font-weight: bold;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      @include center-flex();
     }
     .links {
       display: flex;
@@ -178,14 +188,14 @@ header {
           left: 0;
           width: 0;
           height: 4px;
-          background: var(--main-clr);
-          transition: var(--main-transition);
+          background: $main-clr;
+          transition: $main-transition;
         }
         &:hover {
-          a {
-            color: var(--main-clr);
-          }
           background-color: #fafafa;
+          a {
+            color: $main-clr;
+          }
           &::before {
             width: 100%;
           }
@@ -193,13 +203,9 @@ header {
       }
       a {
         text-transform: capitalize;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: relative;
+        @include center-flex();
         color: black;
-        overflow: hidden;
-        transition: var(--main-transition);
+        transition: $main-transition;
         font-size: 14px;
         padding: 10px;
         height: 100%;
@@ -214,7 +220,6 @@ header {
         min-width: 330px;
         display: none;
         img {
-          max-width: 100%;
           max-height: 100%;
           width: 100%;
         }
@@ -226,9 +231,9 @@ header {
       top: 100%;
       left: 0;
       padding: 5px;
-      border-bottom: 3px solid var(--main-clr-alt);
+      border-bottom: 3px solid $main-clr-alt;
       border-top: 1px solid #e9e6e6;
-      transition: top var(--main-transition), opacity var(--main-transition);
+      transition: top $main-transition, opacity $main-transition;
       menu {
         cursor: pointer;
         li {
@@ -238,7 +243,7 @@ header {
           a {
             padding: 15px;
             height: 50px;
-            color: var(--main-clr);
+            color: $main-clr;
             font-size: 18px;
             font-weight: bold;
             display: block;
@@ -263,9 +268,7 @@ header {
       justify-content: space-between;
       height: 72px;
       .logo {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        @include center-flex();
         height: 100%;
       }
       .links {
@@ -301,9 +304,9 @@ header {
     }
   }
 }
-// landing -----------------------------
+/* Main */
 .landing {
-  background: var(--section-bg);
+  background: $section-bg;
   height: calc(100vh - 72px);
   position: relative;
   overflow: hidden;
@@ -319,9 +322,7 @@ header {
   }
   .container {
     height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include center-flex();
     padding-bottom: 120px;
     height: 100%;
     text-align: center;
@@ -329,9 +330,7 @@ header {
       width: 100%;
     }
     .text {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      @include center-flex();
       flex-direction: column;
       h1 {
         font-size: 28px;
@@ -348,8 +347,9 @@ header {
     }
     .img {
       display: none;
-      min-width: 600px;
       img {
+        width: 600px;
+        min-width: 600px;
         position: relative;
         animation: up-and-down 5s linear infinite;
       }
@@ -365,21 +365,21 @@ header {
     }
     .go-down {
       position: absolute;
-      color: var(--main-clr);
       bottom: 30px;
       left: 50%;
       transform: translateX(-50%);
-      transition: var(--main-transition);
+      transition: $main-transition;
+      color: $main-clr;
       z-index: 1;
+      &:hover {
+        color: #838aff;
+      }
       i {
         animation: bouncing 1.5s infinite;
         @keyframes bouncing {
-          0%,
-          10%,
           20%,
           50%,
-          80%,
-          100% {
+          80% {
             transform: translateY(0);
           }
           40%,
@@ -390,65 +390,55 @@ header {
       }
     }
   }
-}
-@media (min-width: 768px) {
-  .landing .container .text {
-    h1 {
-      font-size: 40px;
-    }
-    p {
-      font-size: 23px;
-      margin-top: 10px;
-    }
-  }
-}
-@media (min-width: 992px) {
-  .landing .container {
-    justify-content: start;
-  }
-  .landing .container .text {
-    align-items: flex-start;
-    text-align: left;
-    h1 {
-      margin-bottom: 0;
-    }
-    p {
-      margin: 0;
-      margin-top: 5px;
+  @media (min-width: 768px) {
+    .container .text {
+      h1 {
+        font-size: 40px;
+      }
+      p {
+        font-size: 23px;
+        margin-top: 10px;
+      }
     }
   }
-  .landing .container .img {
-    display: block;
+  @media (min-width: 992px) {
+    .container {
+      justify-content: start;
+    }
+    .container .text {
+      align-items: flex-start;
+      text-align: left;
+      h1 {
+        margin-bottom: 0;
+      }
+      p {
+        margin: 0;
+        margin-top: 5px;
+      }
+    }
+    .container .img {
+      display: block;
+    }
   }
 }
 .articles {
-  padding-top: var(--main-padding-top);
-  padding-bottom: var(--main-padding-bottom);
+  @include section-padding();
   position: relative;
+  overflow: hidden;
   .container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 40px;
-    .box {
+    @include grid-fit();
+    .wrapper {
       box-shadow: 0 2px 15px rgb(0 0 0 / 10%);
       background-color: white;
       border-radius: 6px;
       overflow: hidden;
-      transition: transform var(--main-transition),
-        box-shadow var(--main-transition);
-      img {
-        width: 100%;
-        max-width: 100%;
-      }
+      transition: $main-transition;
       .content {
         padding: 20px;
-        h3 {
-          margin: 0;
-        }
         p {
           margin: 10px 0 0;
           line-height: 1.5;
-          color: #777;
+          color: #444;
         }
       }
       .info {
@@ -457,7 +447,7 @@ header {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        color: var(--main-clr);
+        color: #0067bc;
         a,
         a:visited,
         a:active {
@@ -481,26 +471,21 @@ header {
   }
 }
 .gallery {
-  background: var(--section-bg);
-  padding-top: var(--main-padding-top);
-  padding-bottom: var(--main-padding-bottom);
-  position: relative;
+  background: $section-bg;
+  @include section-padding();
   .container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 40px;
-    .box {
+    @include grid-fit();
+    .wrapper {
       position: relative;
       background: #fff;
       padding: 15px;
       box-shadow: 0px 12px 20px 0px rgb(0 0 0 / 13%),
         0px 2px 4px 0px rgb(0 0 0 / 12%);
+      transition: $main-transition;
       .image {
-        width: 100%;
         overflow: hidden;
         img {
-          transition: var(--main-transition);
-          max-width: 100%;
+          transition: $main-transition;
         }
       }
       &::before {
@@ -513,7 +498,7 @@ header {
         opacity: 0;
         transform: scale(0);
         background-color: rgb(255 255 255 / 20%);
-        transition: var(--main-transition);
+        transition: $main-transition;
         z-index: 2;
       }
       &:hover {
@@ -541,28 +526,22 @@ header {
   }
 }
 .features {
-  padding-top: var(--main-padding-top);
-  padding-bottom: var(--main-padding-bottom);
+  @include section-padding();
   overflow: hidden;
   .container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 40px;
+    @include grid-fit();
     .box {
       text-align: center;
       border: 1px solid #ccc;
       height: min-content;
-      transition: var(--main-transition);
-      .img-holder {
+      transition: $main-transition;
+      .image {
         position: relative;
         clip-path: polygon(0 0, 100% 0%, 100% 53%, 0% 87%);
-        transition: var(--main-transition);
+        transition: $main-transition;
         overflow: hidden;
         height: 50%;
         margin-bottom: 5px;
-        img {
-          width: 100%;
-        }
         &::before {
           content: "";
           position: absolute;
@@ -594,7 +573,7 @@ header {
         font-size: 20px;
         margin: 30px 0;
         padding: 25px;
-        color: #777;
+        color: #444;
       }
       a {
         display: block;
@@ -606,7 +585,7 @@ header {
         font-size: 22px;
         padding: 10px 30px;
         border-radius: 6px;
-        transition: var(--main-transition);
+        transition: $main-transition;
         position: relative;
         &::after {
           position: absolute;
@@ -615,12 +594,12 @@ header {
           left: 0;
           width: 0;
           height: 100%;
-          transition: var(--main-transition);
+          transition: $main-transition;
           z-index: -1;
         }
       }
       &.quality {
-        .img-holder::before {
+        .image::before {
           background: #f44036;
         }
         h2::after {
@@ -635,7 +614,7 @@ header {
         }
       }
       &.time {
-        .img-holder::before {
+        .image::before {
           background: #009688;
         }
         h2::after {
@@ -650,22 +629,22 @@ header {
         }
       }
       &.passion {
-        .img-holder::before {
-          background: #03a9f4;
+        .image::before {
+          background: #0088c8;
         }
         h2::after {
-          background: #03a9f4;
+          background: #0088c8;
         }
         a {
-          border: 3px solid #03a9f4;
-          color: #03a9f4;
+          border: 3px solid #0088c8;
+          color: #0088c8;
           &::after {
-            background: #03a9f4;
+            background: #0088c8;
           }
         }
       }
       &:hover {
-        .img-holder {
+        .image {
           // clip-path: polygon(0 0, 100% 0%, 100% 87%, 0% 53%);
           clip-path: polygon(0 53%, 0 0, 100% 0, 100% 87%);
         }
@@ -680,21 +659,18 @@ header {
   }
 }
 .testimonials {
-  padding-top: var(--main-padding-top);
-  padding-bottom: var(--main-padding-bottom);
-  background: var(--section-bg);
+  @include section-padding();
+  background: $section-bg;
   .container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    column-gap: 40px;
+    @include grid-fit();
     row-gap: 60px;
-    .box {
+    .wrapper {
       position: relative;
       padding: 20px;
-      background-color: white;
       box-shadow: 0 2px 4px rgb(0 0 0 / 7%);
       border-radius: 6px;
-      transition: var(--main-transition);
+      transition: $main-transition;
+      background-color: #d0d7dd;
       img {
         position: absolute;
         right: -10px;
@@ -702,13 +678,13 @@ header {
         width: 100px;
         height: 100px;
         border-radius: 50%;
-        border: 10px solid var(--section-bg);
+        border: 10px solid $section-bg;
       }
       h3 {
         margin: 0 0 10px;
       }
       .title {
-        color: #777;
+        color: #333;
         margin-bottom: 10px;
         display: block;
       }
@@ -717,7 +693,7 @@ header {
       }
       p {
         line-height: 1.5;
-        color: #777;
+        color: #555;
         margin-top: 10px;
         margin-bottom: 0;
       }
@@ -725,16 +701,15 @@ header {
   }
 }
 .team {
-  padding-top: var(--main-padding-top);
-  padding-bottom: var(--main-padding-bottom);
+  @include section-padding();
   .container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 40px;
-    .box {
+    @include grid-fit();
+    .wrapper {
       padding-top: 60px;
       position: relative;
-      transition: var(--main-transition);
+      transition: $main-transition;
+      border-radius: 10px;
+      overflow: hidden;
       .data {
         display: flex;
         .links {
@@ -747,28 +722,28 @@ header {
             width: 100%;
             text-align: center;
             &:hover i {
-              color: var(--main-clr);
+              color: $main-clr;
             }
           }
           i {
             color: #777;
-            transition: var(--main-transition);
+            transition: $main-transition;
           }
         }
         img {
           width: calc(100% - 60px);
-          transition: var(--main-transition);
+          transition: $main-transition;
           border-radius: 10px;
         }
       }
       .info {
-        padding-left: 60px;
+        padding: 10px 0 10px 60px;
         h3 {
           margin-top: 22px;
           margin-bottom: 0;
-          color: var(--main-clr);
+          color: #333;
           font-size: 22px;
-          transition: var(--main-transition);
+          transition: $main-transition;
         }
         p {
           margin-top: 10px;
@@ -785,7 +760,7 @@ header {
         z-index: -1;
         background-color: #e4e4e4;
         border-radius: 10px;
-        transition: var(--main-transition);
+        transition: $main-transition;
       }
       &:hover {
         .data img {
@@ -803,16 +778,16 @@ header {
   }
 }
 .services {
-  padding-top: var(--main-padding-top);
-  padding-bottom: var(--main-padding-bottom);
-  background: var(--section-bg);
+  @include section-padding();
+  background: $section-bg;
   .container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 40px;
+    @include grid-fit();
     .box {
       counter-increment: services;
       position: relative;
+      .wrapper {
+        transition: $main-transition;
+      }
       .cover {
         width: 100%;
         height: 100%;
@@ -824,7 +799,7 @@ header {
           z-index: 2;
           right: 0;
           left: 0;
-          transition: var(--main-transition);
+          transition: $main-transition;
           background-color: #ddd;
         }
         &::before {
@@ -857,8 +832,8 @@ header {
           top: 0;
           height: 3px;
           width: 100%;
-          background: var(--main-clr);
-          transition: var(--main-transition);
+          background: $main-clr;
+          transition: $main-transition;
           transform: scaleX(0);
         }
       }
@@ -872,14 +847,16 @@ header {
         text-align: center;
         margin: 20px 0 40px;
         font-size: 25px;
-        color: var(--main-clr);
+        color: $main-clr;
       }
       .info {
         padding: 15px;
         text-align: right;
         position: relative;
         a {
-          color: var(--main-clr);
+          color: $main-clr;
+          font-size: 19px;
+          font-weight: bold;
         }
         &::after {
           position: absolute;
@@ -888,10 +865,8 @@ header {
           left: 0;
           height: 100%;
           width: 100px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          background-color: var(--main-clr);
+          @include center-flex();
+          background-color: $main-clr;
           color: #fff;
           font-size: 30px;
           font-weight: bold;
@@ -921,8 +896,7 @@ header {
   }
 }
 .skills {
-  padding-top: var(--main-padding-top);
-  padding-bottom: var(--main-padding-bottom);
+  @include section-padding();
   .container {
     display: flex;
     justify-content: space-between;
@@ -945,7 +919,7 @@ header {
           border: 1px solid #ccc;
           padding: 3px 5px;
           border-radius: 4px;
-          color: var(--main-clr);
+          color: #333;
         }
       }
       .progress-bar {
@@ -959,7 +933,7 @@ header {
           top: 0;
           width: 0;
           height: 100%;
-          background-color: var(--main-clr);
+          background-color: $main-clr;
           transition: width 0.5s linear;
         }
       }
@@ -977,9 +951,8 @@ header {
   }
 }
 .how-it-works {
-  padding-top: var(--main-padding-top);
-  padding-bottom: var(--main-padding-bottom);
-  background: var(--section-bg);
+  @include section-padding();
+  background: $section-bg;
   .container {
     display: flex;
     flex-direction: column;
@@ -1009,16 +982,16 @@ header {
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: #ededed;
+        background-color: #e7e7e7;
         z-index: -1;
-        transition: var(--main-transition);
+        transition: $main-transition;
         transform: scale(0);
       }
       &:hover::after {
         transform: scale(1);
       }
       img {
-        width: 64px;
+        max-width: 64px;
         margin-bottom: 30px;
       }
       h3 {
@@ -1026,7 +999,7 @@ header {
         font-size: 22px;
       }
       p {
-        color: #777;
+        color: #444;
         line-height: 1.7;
         margin: 10px 0 0;
         font-size: 18px;
@@ -1056,8 +1029,7 @@ header {
   }
 }
 .events {
-  padding-top: var(--main-padding-top);
-  padding-bottom: var(--main-padding-bottom);
+  @include section-padding();
   .container {
     text-align: center;
     position: relative;
@@ -1065,7 +1037,7 @@ header {
     &::before {
       position: absolute;
       content: "";
-      background: #0000 url("../images/dots.png") no-repeat;
+      background: #0000 url("../images/dots.avif") no-repeat;
       width: 204px;
       height: 186px;
       z-index: -1;
@@ -1079,47 +1051,41 @@ header {
       left: 0;
     }
     .wrapper {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      @include center-flex();
     }
     img {
       max-width: 450px;
       display: none;
     }
     .time {
-      display: flex;
-      align-items: center;
+      @include center-flex();
       flex-wrap: wrap;
       margin: 20px auto;
       gap: 10px;
-      justify-content: center;
       .unit {
         border: 1px solid #d4d4d4;
         border-radius: 6px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        @include center-flex();
         flex-direction: column;
         width: 75px;
         background: #fff;
-        transition: var(--main-transition);
+        transition: $main-transition;
         -webkit-user-select: none;
         user-select: none;
         &:hover {
-          border-color: var(--main-clr);
+          border-color: $main-clr;
           & > *:last-child::after {
-            border-color: var(--main-clr);
+            border-color: $main-clr;
           }
         }
         & > * {
           display: block;
-          transition: var(--main-transition);
+          transition: $main-transition;
         }
         & > *:first-child {
           font-size: 35px;
           padding: 15px;
-          color: var(--main-clr);
+          color: $main-clr;
           font-weight: bold;
         }
         & > *:last-child {
@@ -1131,7 +1097,7 @@ header {
             position: absolute;
             content: "";
             top: 0;
-            transition: var(--main-transition);
+            transition: $main-transition;
             left: 0;
             width: 100%;
             height: 100%;
@@ -1148,7 +1114,7 @@ header {
       margin: 16px 0;
       line-height: 1.7;
       font-size: 19px;
-      color: #777;
+      color: #555;
     }
     .subscribe {
       display: flex;
@@ -1160,22 +1126,22 @@ header {
       [type="email"] {
         padding: 20px;
         border-radius: 50px;
-        border: 2px solid var(--main-clr);
+        border: 2px solid $main-clr;
         flex: 1;
-        caret-color: var(--main-clr);
+        caret-color: $main-clr;
       }
       [type="submit"] {
         border-radius: 0px;
         border: none;
-        background-color: var(--main-clr);
+        background-color: $main-clr;
         color: white;
         font-weight: bold;
         padding: 20px;
         cursor: pointer;
-        transition: var(--main-transition);
+        transition: $main-transition;
         border-radius: 50px;
         &:hover {
-          background-color: var(--main-clr-alt);
+          background-color: $main-clr-alt;
         }
       }
     }
@@ -1186,12 +1152,12 @@ header {
         flex-direction: row;
         [type="submit"] {
           border: none;
-          background-color: var(--main-clr);
+          background-color: $main-clr;
           color: white;
           font-weight: bold;
           padding: 20px;
           cursor: pointer;
-          transition: var(--main-transition);
+          transition: $main-transition;
         }
       }
     }
@@ -1203,13 +1169,11 @@ header {
   }
 }
 .plans {
-  padding-top: var(--main-padding-top);
-  padding-bottom: var(--main-padding-bottom);
-  background: var(--section-bg);
+  @include section-padding();
+  background: $section-bg;
   overflow: hidden;
   .container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    @include grid-fit();
     gap: 30px;
     position: relative;
     z-index: 1;
@@ -1217,7 +1181,7 @@ header {
     &::before {
       position: absolute;
       content: "";
-      background: #0000 url("../images/dots.png") no-repeat;
+      background: #0000 url("../images/dots.avif") no-repeat;
       width: 204px;
       height: 186px;
       z-index: -1;
@@ -1230,20 +1194,21 @@ header {
       bottom: 100px;
       left: -150px;
     }
-    .box {
+    .wrapper {
       position: relative;
       box-shadow: 0 12px 20px 0 rgb(0 0 0 / 13%), 0 2px 4px 0 rgb(0 0 0 / 12%);
-      transition: var(--main-transition);
+      transition: $main-transition;
       background: white;
       text-align: center;
       z-index: 1;
+      padding: 20px 0;
       &::before,
       &::after {
         position: absolute;
         content: "";
         background: #dce1fa;
         z-index: -1;
-        transition: var(--main-transition);
+        transition: $main-transition;
       }
       &::before {
         top: 50%;
@@ -1280,10 +1245,10 @@ header {
         font-size: 60px;
         font-weight: bold;
         margin-bottom: 5px;
-        color: var(--main-clr);
+        color: $main-clr;
       }
       .time {
-        color: #777;
+        color: #666;
       }
       menu {
         text-align: left;
@@ -1297,23 +1262,23 @@ header {
           content: "\f00c";
           margin-right: 10px;
           font-weight: 900;
-          color: var(--main-clr);
+          color: $main-clr;
         }
       }
       a {
         display: block;
         width: -moz-fit-content;
         width: fit-content;
-        border: 2px solid var(--main-clr);
-        color: var(--main-clr);
+        border: 2px solid $main-clr;
+        color: $main-clr;
         margin: 30px auto 40px;
         padding: 15px 20px;
         border-radius: 6px;
         font-weight: bold;
-        transition: var(--main-transition);
+        transition: $main-transition;
         &:hover {
           color: #fff;
-          background-color: var(--main-clr);
+          background-color: $main-clr;
         }
       }
       &.popular {
@@ -1327,7 +1292,7 @@ header {
         right: 20px;
         width: 40px;
         padding: 10px 10px 35px 10px;
-        background-color: var(--main-clr);
+        background-color: $main-clr;
         color: white;
         font-weight: bold;
         writing-mode: vertical-rl;
@@ -1337,22 +1302,21 @@ header {
           content: "";
           border: 20px solid;
           border-color: #0000 #0000 #fff #0000;
-          transition: border-color var(--main-transition);
+          transition: border-color $main-transition;
           bottom: 0;
           left: 0;
         }
       }
     }
     @media (min-width: 993px) {
-      .box.popular {
+      .wrapper.popular {
         transform: translateY(-20px);
       }
     }
   }
 }
 .videos {
-  padding-top: var(--main-padding-top);
-  padding-bottom: var(--main-padding-bottom);
+  @include section-padding();
   .wrapper {
     display: flex;
     flex-wrap: wrap;
@@ -1370,7 +1334,7 @@ header {
       width: 100%;
       background-color: #f4f4f4;
       font-weight: bold;
-      color: var(--main-clr);
+      color: $main-clr-alt;
       i {
         cursor: pointer;
       }
@@ -1379,15 +1343,15 @@ header {
       padding: 20px;
       border-top: 1px solid #ddd;
       cursor: pointer;
-      transition: var(--main-transition);
+      transition: $main-transition;
       span {
         display: block;
         margin-top: 10px;
-        color: #777;
-        transition: var(--main-transition);
+        color: #666;
+        transition: $main-transition;
       }
       &:hover {
-        color: var(--main-clr);
+        color: $main-clr;
         span {
           margin-left: 5px;
         }
@@ -1402,16 +1366,20 @@ header {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    justify-content: space-between;
-    p {
-      padding: 20px;
-      background-color: white;
+    justify-content: space-around;
+    align-items: center;
+    iframe {
+      width: 100%;
+      aspect-ratio: 16/9;
+      &.disabled {
+        display: none;
+      }
     }
     .description {
-      max-height: 90px;
-      height: min-content;
-      overflow-y: scroll;
-      outline-color: var(--main-clr-alt);
+      text-align: center;
+      padding: 10px;
+      font-size: 25px;
+      background-color: white;
     }
   }
   @media (min-width: 992px) {
@@ -1421,12 +1389,10 @@ header {
   }
 }
 .stats {
-  padding-top: var(--main-padding-top);
-  padding-bottom: var(--main-padding-bottom);
-  background: var(--section-bg);
+  @include section-padding();
+  background: $section-bg;
   .container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    @include grid-fill();
     gap: 20px;
   }
   .box {
@@ -1435,14 +1401,14 @@ header {
     text-align: center;
     position: relative;
     opacity: 0.8;
-    transition: var(--main-transition);
+    transition: $main-transition;
     &::before,
     &::after {
       position: absolute;
       content: "";
       height: 0%;
       width: 2px;
-      background: var(--main-clr);
+      background: $main-clr;
       transition: 1000ms;
     }
     &::before {
@@ -1476,7 +1442,7 @@ header {
         content: "";
         height: 2px;
         width: 0%;
-        background: var(--main-clr);
+        background: $main-clr;
         transition: 1000ms;
       }
       &::after {
@@ -1497,7 +1463,7 @@ header {
     margin-bottom: 10px;
   }
   .text {
-    color: var(--main-clr);
+    color: $main-clr;
     font-style: italic;
     font-size: 20px;
     font-weight: bold;
@@ -1512,19 +1478,15 @@ header {
   }
   .left,
   .right {
-    display: flex;
+    @include center-flex();
     flex-basis: 50%;
-    justify-content: center;
-    align-items: center;
   }
   .content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include center-flex();
     flex-direction: column;
   }
   .left {
-    color: #fff;
+    color: #222;
     padding: 0 20px;
     position: relative;
     &::before,
@@ -1537,7 +1499,8 @@ header {
       bottom: 0;
     }
     &::after {
-      background: rgb(23 135 224 / 97%) url("../images/discount-background.jpg");
+      background: rgb(23 135 224 / 97%)
+        url("../images/discount-background.avif");
       background-size: cover;
       z-index: -2;
     }
@@ -1590,7 +1553,7 @@ header {
       border: none;
       border-bottom: 1px solid #ccc;
       background-color: #f9f9f9;
-      caret-color: var(--main-clr);
+      caret-color: $main-clr;
       &::placeholder {
         text-transform: capitalize;
       }
@@ -1601,13 +1564,13 @@ header {
     [type="submit"] {
       display: block;
       padding: 15px;
-      background-color: var(--main-clr);
+      background-color: $main-clr;
       color: white;
       font-weight: bold;
       font-size: 20px;
       border: none;
       cursor: pointer;
-      transition: var(--main-transition);
+      transition: $main-transition;
     }
   }
   @media (min-width: 992px) {
@@ -1616,13 +1579,12 @@ header {
     }
   }
 }
+/* Footer */
 footer {
   background-color: #191919;
   padding: 70px 0 0;
   .container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 40px;
+    @include grid-fill();
     text-align: center;
     align-items: start;
   }
@@ -1641,13 +1603,11 @@ footer {
       a {
         background-color: #313131;
         color: #b9b9b9;
-        display: inline-flex;
-        justify-content: center;
-        align-items: center;
+        @include center-flex();
         width: 50px;
         height: 50px;
         font-size: 20px;
-        transition: var(--main-transition);
+        transition: $main-transition;
       }
       .facebook:hover {
         background-color: #1877f2;
@@ -1667,7 +1627,7 @@ footer {
   .links {
     li {
       padding: 15px 0;
-      transition: var(--main-transition);
+      transition: $main-transition;
       &:not(:last-child) {
         border-bottom: 1px solid #444;
       }
@@ -1680,27 +1640,25 @@ footer {
     }
     a {
       color: #b9b9b9;
-      transition: var(--main-transition);
+      transition: $main-transition;
       &::before {
         font-family: "Font Awesome 5 Free";
         content: "\F101";
         font-weight: 900;
         margin-right: 10px;
-        color: var(--main-clr);
+        color: $main-clr;
       }
     }
   }
   .address {
-    display: flex;
+    @include center-flex();
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     gap: 30px;
     color: #b9b9b9;
     line-height: 1.7;
     i {
       font-size: 25px;
-      color: var(--main-clr);
+      color: $main-clr;
     }
     .info span {
       display: block;
