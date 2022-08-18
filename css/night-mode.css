@@ -1,0 +1,199 @@
+body.dark-mode .main-title {
+  color: #fff;
+  border-color: #fff;
+}
+body.dark-mode header {
+  background-color: #1b262c;
+}
+body.dark-mode header .container nav .links li,
+body.dark-mode header .container nav .links li a,
+body.dark-mode header .container nav .links li i,
+body.dark-mode header .container .mega-menu menu li,
+body.dark-mode header .container .mega-menu menu li a,
+body.dark-mode header .container .mega-menu menu li i {
+  color: #fff;
+}
+body.dark-mode header .container nav .links li:hover,
+body.dark-mode header .container .mega-menu menu li:hover {
+  background: #fff;
+}
+body.dark-mode header .container nav .links li:hover a,
+body.dark-mode header .container nav .links li:hover i,
+body.dark-mode header .container .mega-menu menu li:hover a,
+body.dark-mode header .container .mega-menu menu li:hover i {
+  color: #1b262c;
+}
+body.dark-mode header .container .mega-menu {
+  background-color: #1b262c;
+}
+body.dark-mode .landing {
+  background: #1b262c;
+  color: #fff;
+}
+body.dark-mode .landing::after {
+  background: #0d171d;
+}
+body.dark-mode .landing p {
+  color: #8f8f8f !important;
+}
+body.dark-mode .articles {
+  background: #0d171d;
+}
+body.dark-mode .articles .container .wrapper {
+  background-color: #1b262c;
+  color: #fff;
+}
+body.dark-mode .articles .container .wrapper .content p {
+  color: #aaa;
+}
+body.dark-mode .gallery {
+  background: #1b262c;
+}
+body.dark-mode .spikes::after {
+  color: #0d171d;
+}
+body.dark-mode .features {
+  background: #0d171d;
+}
+body.dark-mode .features .container .box .wrapper {
+  background: #2b2b2b;
+  color: #fff;
+}
+body.dark-mode .features .container .box .wrapper p {
+  color: #ececec;
+}
+body.dark-mode .testimonials {
+  background: #1b262c;
+}
+body.dark-mode .team {
+  background: #0d171d;
+}
+body.dark-mode .services {
+  background: #1b262c;
+}
+body.dark-mode .skills {
+  background: #0d171d;
+}
+body.dark-mode .how-it-works {
+  background: #1b262c;
+}
+body.dark-mode .events {
+  background: #0d171d;
+}
+body.dark-mode .plans {
+  background: #1b262c;
+}
+body.dark-mode .videos {
+  background: #0d171d;
+}
+body.dark-mode .stats {
+  background: #1b262c;
+}
+body.dark-mode .discount .right {
+  background: #1b262c;
+}
+body.dark-mode .features .container .box .wrapper {
+  border-color: #000;
+}
+body.dark-mode .gallery .container .wrapper {
+  background: #0d171d;
+}
+body.dark-mode .gallery .container .wrapper::before {
+  background: rgba(13, 23, 29, 0.2196078431);
+}
+body.dark-mode .testimonials .container .wrapper {
+  color: #fff;
+  background-color: #344350;
+}
+body.dark-mode .testimonials .container .wrapper .title {
+  color: #c1c1c1;
+}
+body.dark-mode .testimonials .container .wrapper p {
+  color: #b0b0b0;
+}
+body.dark-mode .team .container .wrapper .info p {
+  color: #ececec;
+}
+body.dark-mode .team .container .wrapper::after {
+  background-color: #2b2b2b;
+}
+body.dark-mode .services .container .box .wrapper {
+  background-color: #2b2b2b;
+}
+body.dark-mode .services .container .box .info::before {
+  background: #444;
+}
+body.dark-mode .services .container .box .cover::before,
+body.dark-mode .services .container .box .cover::after {
+  background-color: #444;
+}
+body.dark-mode .skills .container .skill h3 {
+  color: #fff;
+}
+body.dark-mode .skills .container .skill h3 .percent {
+  color: #ececec;
+}
+body.dark-mode .how-it-works .container .box {
+  background-color: #555;
+  border: 2px solid #444;
+}
+body.dark-mode .how-it-works .container .box p {
+  color: #cacaca;
+  transition: 300ms;
+}
+body.dark-mode .how-it-works .container .box:hover p {
+  color: #444;
+}
+body.dark-mode .events .container .time .unit {
+  border: 1px solid #d4d4d4;
+  background: #2b2b2b;
+}
+body.dark-mode .events .container .time .unit span {
+  color: #ececec;
+}
+body.dark-mode .events .container .title {
+  color: #fff;
+}
+body.dark-mode .events .container .description {
+  color: #ececec;
+}
+body.dark-mode .events .container .subscribe {
+  background-color: #aaa;
+}
+body.dark-mode .plans .container .wrapper {
+  background: #2b2b2b;
+  color: #fff;
+}
+body.dark-mode .plans .container .wrapper .time {
+  color: #ececec;
+}
+body.dark-mode .plans .container .wrapper .label::after {
+  color: #2b2b2b;
+}
+body.dark-mode .videos .left {
+  background-color: #1b262c;
+  color: #ececec;
+}
+body.dark-mode .videos .left li span {
+  color: #ddd;
+}
+body.dark-mode .videos .right .description {
+  background-color: #aaa;
+}
+body.dark-mode .videos .right {
+  background-color: #2b2b2b;
+}
+body.dark-mode .videos .left header {
+  background-color: #2b2b2b;
+}
+body.dark-mode .plans .container .wrapper::before,
+body.dark-mode .plans .container .wrapper::after {
+  background: #1b262c;
+}
+body.dark-mode .plans .container .wrapper.popular:hover .label::after {
+  color: #1b262c;
+}
+body.dark-mode .discount .left,
+body.dark-mode .discount .right {
+  color: #fff;
+}/*# sourceMappingURL=night-mode.css.map */

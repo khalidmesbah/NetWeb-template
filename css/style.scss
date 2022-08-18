@@ -1,7 +1,9 @@
 /* Variables */
 $main-clr: #2196f3;
 $main-clr-alt: #1787e0;
-$section-bg: #ececec;
+$main-bg: #fff;
+$sec-bg: #ececec;
+$helper-clr: #ddd;
 $main-transition: 300ms;
 $main-padding: 100px;
 /* Global Rules */
@@ -132,8 +134,11 @@ menu {
 }
 img {
   max-width: 100%;
+  max-height: 100%;
   min-width: 20px;
   min-height: 20px;
+  width: 100%;
+  height: 100%;
 }
 .spikes {
   position: relative;
@@ -146,18 +151,85 @@ img {
     top: 100%;
     display: block;
     height: 50px;
+    color: $main-bg;
+    background-image: linear-gradient(135deg, currentcolor 25%, transparent 25%),
+      linear-gradient(225deg, currentcolor 25%, transparent 25%);
     background-size: 50px 100%;
-    background-image: linear-gradient(135deg, #fff 25%, transparent 25%),
-      linear-gradient(225deg, #fff 25%, transparent 25%);
     background-position: 0 0;
+  }
+}
+section {
+  overflow: hidden;
+}
+/* End Global Rules */
+/* Settings */
+.settings {
+  position: fixed;
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
+  top: 200px;
+  width: 150px;
+  font-size: 20px;
+  height: fit-content;
+  z-index: 4;
+  padding: 10px;
+  text-transform: capitalize;
+  color: $main-bg;
+  background: $main-clr;
+  transition: $main-transition;
+  left: -150px;
+  &.active{
+    left: 0;
+  }
+  .btn {
+    position: absolute;
+    right: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 50px;
+    width: 25px;
+    background: inherit;
+    border-end-end-radius: 25px;
+    border-start-end-radius: 25px;
+    z-index: -1;
+    @include center-flex();
+    &:hover::after{
+      color: $sec-bg;
+    }
+    &::after{
+      position: absolute;
+      content:'';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      box-shadow: 0 -10px,0 10px;
+      background: currentColor;
+      transition: $main-transition;
+    }
+  }
+  a,
+  a:visited,
+  a:active {
+    color: inherit;
+    &:hover {
+      color: $sec-bg;
+    }
+  }
+  * {
+    all: unset;
+    cursor: pointer;
+    &:hover {
+      color: $sec-bg;
+    }
   }
 }
 /* Header */
 header {
   position: relative;
-  box-shadow: 0 0 10px #ddd;
-  background: #fff;
-  border-bottom: 1px solid #ddd;
+  box-shadow: 0 0 10px $helper-clr;
+  background: $main-bg;
+  border-bottom: 1px solid $helper-clr;
   z-index: 1;
   &.fixed {
     position: fixed;
@@ -225,7 +297,7 @@ header {
         }
       }
       position: absolute;
-      background: #fff;
+      background: $main-bg;
       z-index: 1;
       width: 100%;
       top: 100%;
@@ -237,6 +309,7 @@ header {
       menu {
         cursor: pointer;
         li {
+          transition: $main-transition;
           &:not(:last-child) {
             border-bottom: 1px solid #e9e6e6;
           }
@@ -249,7 +322,7 @@ header {
             display: block;
             padding-bottom: 36px;
             i {
-              margin-right: 10px;
+              margin-inline-end: 10px;
             }
           }
         }
@@ -306,10 +379,9 @@ header {
 }
 /* Main */
 .landing {
-  background: $section-bg;
+  background: $sec-bg;
   height: calc(100vh - 72px);
   position: relative;
-  overflow: hidden;
   &::after {
     position: absolute;
     content: "";
@@ -318,7 +390,7 @@ header {
     bottom: -100px;
     height: 230px;
     transform: rotate(-6deg);
-    background: #fff;
+    background: $main-bg;
   }
   .container {
     height: 100%;
@@ -423,8 +495,8 @@ header {
 }
 .articles {
   @include section-padding();
+  background: $main-bg;
   position: relative;
-  overflow: hidden;
   .container {
     @include grid-fit();
     .wrapper {
@@ -471,17 +543,19 @@ header {
   }
 }
 .gallery {
-  background: $section-bg;
+  background: $sec-bg;
   @include section-padding();
   .container {
     @include grid-fit();
     .wrapper {
       position: relative;
-      background: #fff;
+      background: $main-bg;
       padding: 15px;
       box-shadow: 0px 12px 20px 0px rgb(0 0 0 / 13%),
         0px 2px 4px 0px rgb(0 0 0 / 12%);
       transition: $main-transition;
+      @include center-flex();
+      overflow: hidden;
       .image {
         overflow: hidden;
         img {
@@ -491,15 +565,14 @@ header {
       &::before {
         position: absolute;
         content: "";
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
+        width: 10px;
+        height: 10px;
         opacity: 0;
         transform: scale(0);
         background-color: rgb(255 255 255 / 20%);
         transition: $main-transition;
         z-index: 2;
+        border-radius: 50%;
       }
       &:hover {
         img {
@@ -514,10 +587,10 @@ header {
             opacity: 1;
           }
           50% {
-            transform: scale(1);
+            transform: scale(40);
           }
           100% {
-            transform: scale(1);
+            transform: scale(40);
             opacity: 0;
           }
         }
@@ -527,14 +600,16 @@ header {
 }
 .features {
   @include section-padding();
-  overflow: hidden;
+  background: $main-bg;
   .container {
     @include grid-fit();
     .box {
-      text-align: center;
-      border: 1px solid #ccc;
-      height: min-content;
-      transition: $main-transition;
+      .wrapper {
+        text-align: center;
+        border: 1px solid #ccc;
+        height: min-content;
+        transition: $main-transition;
+      }
       .image {
         position: relative;
         clip-path: polygon(0 0, 100% 0%, 100% 53%, 0% 87%);
@@ -586,17 +661,8 @@ header {
         padding: 10px 30px;
         border-radius: 6px;
         transition: $main-transition;
-        position: relative;
-        &::after {
-          position: absolute;
-          content: "";
-          top: 0;
-          left: 0;
-          width: 0;
-          height: 100%;
-          transition: $main-transition;
-          z-index: -1;
-        }
+        background-position: right bottom;
+        background-size: 200% 100%;
       }
       &.quality {
         .image::before {
@@ -608,9 +674,7 @@ header {
         a {
           border: 3px solid #f44036;
           color: #f44036;
-          &::after {
-            background: #f44036;
-          }
+          background-image: linear-gradient(90deg, #f44036 50%, 0, $main-bg);
         }
       }
       &.time {
@@ -623,9 +687,7 @@ header {
         a {
           border: 3px solid #009688;
           color: #009688;
-          &::after {
-            background: #009688;
-          }
+          background-image: linear-gradient(90deg, #009688 50%, 0, $main-bg);
         }
       }
       &.passion {
@@ -638,21 +700,16 @@ header {
         a {
           border: 3px solid #0088c8;
           color: #0088c8;
-          &::after {
-            background: #0088c8;
-          }
+          background-image: linear-gradient(90deg, #0088c8 50%, 0, $main-bg);
         }
       }
       &:hover {
         .image {
-          // clip-path: polygon(0 0, 100% 0%, 100% 87%, 0% 53%);
           clip-path: polygon(0 53%, 0 0, 100% 0, 100% 87%);
         }
         a {
-          color: #fff !important;
-          &::after {
-            width: 100%;
-          }
+          color: $main-bg;
+          background-position: left bottom;
         }
       }
     }
@@ -660,14 +717,17 @@ header {
 }
 .testimonials {
   @include section-padding();
-  background: $section-bg;
+  background: $sec-bg;
   .container {
     @include grid-fit();
     row-gap: 60px;
     .wrapper {
       position: relative;
       padding: 20px;
-      box-shadow: 0 2px 4px rgb(0 0 0 / 7%);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      box-shadow: 0 2px 4px #00000012;
       border-radius: 6px;
       transition: $main-transition;
       background-color: #d0d7dd;
@@ -678,14 +738,10 @@ header {
         width: 100px;
         height: 100px;
         border-radius: 50%;
-        border: 10px solid $section-bg;
-      }
-      h3 {
-        margin: 0 0 10px;
+        border: 10px solid $sec-bg;
       }
       .title {
         color: #333;
-        margin-bottom: 10px;
         display: block;
       }
       .filled {
@@ -694,14 +750,13 @@ header {
       p {
         line-height: 1.5;
         color: #555;
-        margin-top: 10px;
-        margin-bottom: 0;
       }
     }
   }
 }
 .team {
   @include section-padding();
+  background: $main-bg;
   .container {
     @include grid-fit();
     .wrapper {
@@ -737,16 +792,18 @@ header {
         }
       }
       .info {
-        padding: 10px 0 10px 60px;
+        padding-inline-start: 60px;
+        padding-inline-end: 0;
+        padding-block-start: 10px;
+        padding-block-end: 10px;
         h3 {
           margin-top: 22px;
-          margin-bottom: 0;
-          color: #333;
+          margin-bottom: 10px;
+          color: $main-clr;
           font-size: 22px;
           transition: $main-transition;
         }
         p {
-          margin-top: 10px;
           margin-bottom: 25px;
         }
       }
@@ -779,7 +836,7 @@ header {
 }
 .services {
   @include section-padding();
-  background: $section-bg;
+  background: $sec-bg;
   .container {
     @include grid-fit();
     .box {
@@ -800,7 +857,7 @@ header {
           right: 0;
           left: 0;
           transition: $main-transition;
-          background-color: #ddd;
+          background-color: $helper-clr;
         }
         &::before {
           top: 0;
@@ -867,10 +924,10 @@ header {
           width: 100px;
           @include center-flex();
           background-color: $main-clr;
-          color: #fff;
+          color: $main-bg;
           font-size: 30px;
           font-weight: bold;
-          padding-right: 15px;
+          padding-inline-end: 15px;
         }
         &::before {
           position: absolute;
@@ -897,15 +954,13 @@ header {
 }
 .skills {
   @include section-padding();
+  background: $main-bg;
   .container {
     display: flex;
     justify-content: space-between;
     .img {
       width: 500px;
       display: none;
-      img {
-        max-width: 100%;
-      }
     }
     .skill {
       width: 100%;
@@ -952,14 +1007,16 @@ header {
 }
 .how-it-works {
   @include section-padding();
-  background: $section-bg;
+  background: $sec-bg;
   .container {
     display: flex;
     flex-direction: column;
+    gap: 20px;
     .img {
       text-align: center;
       width: 100%;
       img {
+        max-width: 450px;
         margin-bottom: 50px;
       }
     }
@@ -969,26 +1026,25 @@ header {
       padding: 30px;
       margin-bottom: 20px;
       border-radius: 6px;
-      display: flex;
-      align-items: center;
+      @include center-flex();
       flex-direction: column;
       border: 2px solid white;
       position: relative;
       z-index: 1;
+      overflow: hidden;
       &::after {
         position: absolute;
         content: "";
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
         background-color: #e7e7e7;
         z-index: -1;
-        transition: $main-transition;
+        transition: 600ms;
         transform: scale(0);
       }
       &:hover::after {
-        transform: scale(1);
+        transform: scale(15);
       }
       img {
         max-width: 64px;
@@ -1021,8 +1077,7 @@ header {
       flex-direction: row;
       align-items: center;
       .img img {
-        margin-right: 100px;
-        max-width: none;
+        margin-inline-end: 80px;
         margin-bottom: 0;
       }
     }
@@ -1030,6 +1085,7 @@ header {
 }
 .events {
   @include section-padding();
+  background: $main-bg;
   .container {
     text-align: center;
     position: relative;
@@ -1037,7 +1093,7 @@ header {
     &::before {
       position: absolute;
       content: "";
-      background: #0000 url("../images/dots.avif") no-repeat;
+      background: transparent url("../images/dots.avif") no-repeat;
       width: 204px;
       height: 186px;
       z-index: -1;
@@ -1068,7 +1124,7 @@ header {
         @include center-flex();
         flex-direction: column;
         width: 75px;
-        background: #fff;
+        background: $main-bg;
         transition: $main-transition;
         -webkit-user-select: none;
         user-select: none;
@@ -1170,8 +1226,7 @@ header {
 }
 .plans {
   @include section-padding();
-  background: $section-bg;
-  overflow: hidden;
+  background: $sec-bg;
   .container {
     @include grid-fit();
     gap: 30px;
@@ -1181,7 +1236,7 @@ header {
     &::before {
       position: absolute;
       content: "";
-      background: #0000 url("../images/dots.avif") no-repeat;
+      background: transparent url("../images/dots.avif") no-repeat;
       width: 204px;
       height: 186px;
       z-index: -1;
@@ -1260,7 +1315,7 @@ header {
         &::before {
           font-family: "Font Awesome 5 Free";
           content: "\f00c";
-          margin-right: 10px;
+          margin-inline-end: 10px;
           font-weight: 900;
           color: $main-clr;
         }
@@ -1277,13 +1332,13 @@ header {
         font-weight: bold;
         transition: $main-transition;
         &:hover {
-          color: #fff;
+          color: $main-bg;
           background-color: $main-clr;
         }
       }
       &.popular {
         &:hover .label::after {
-          border-color: #0000 #0000 #dce1fa #0000;
+          color: #dce1fa;
         }
       }
       .label {
@@ -1291,7 +1346,10 @@ header {
         top: 0;
         right: 20px;
         width: 40px;
-        padding: 10px 10px 35px 10px;
+        padding-inline-start: 10px;
+        padding-inline-end: 35px;
+        padding-block-start: 10px;
+        padding-block-end: 10px;
         background-color: $main-clr;
         color: white;
         font-weight: bold;
@@ -1301,7 +1359,8 @@ header {
           position: absolute;
           content: "";
           border: 20px solid;
-          border-color: #0000 #0000 #fff #0000;
+          color: $main-bg;
+          border-color: transparent transparent currentColor transparent;
           transition: border-color $main-transition;
           bottom: 0;
           left: 0;
@@ -1317,14 +1376,18 @@ header {
 }
 .videos {
   @include section-padding();
+  background: $main-bg;
   .wrapper {
     display: flex;
     flex-wrap: wrap;
-    border: 1px solid #ddd;
+    border: 1px solid $helper-clr;
+  }
+  img {
+    height: fit-content;
   }
   .left {
     flex-grow: 1;
-    background: #fff;
+    background: $main-bg;
     min-width: 300px;
     header {
       display: flex;
@@ -1341,7 +1404,7 @@ header {
     }
     li {
       padding: 20px;
-      border-top: 1px solid #ddd;
+      border-top: 1px solid $helper-clr;
       cursor: pointer;
       transition: $main-transition;
       span {
@@ -1390,7 +1453,7 @@ header {
 }
 .stats {
   @include section-padding();
-  background: $section-bg;
+  background: $sec-bg;
   .container {
     @include grid-fill();
     gap: 20px;
@@ -1529,6 +1592,7 @@ header {
   }
   .right {
     padding: 20px;
+    background: $main-bg;
     .content {
       width: 70%;
       max-width: 400px;
@@ -1613,10 +1677,10 @@ footer {
         background-color: #1877f2;
       }
       .twitter:hover {
-        background-color: #ff0000;
+        background-color: #1da1f2;
       }
       .youtube:hover {
-        background-color: #1da1f2;
+        background-color: #ff0000;
       }
     }
     .text {
@@ -1632,9 +1696,9 @@ footer {
         border-bottom: 1px solid #444;
       }
       &:hover {
-        padding-left: 10px;
+        padding-inline-start: 10px;
         a {
-          color: #fff;
+          color: $main-bg;
         }
       }
     }
@@ -1645,7 +1709,7 @@ footer {
         font-family: "Font Awesome 5 Free";
         content: "\F101";
         font-weight: 900;
-        margin-right: 10px;
+        margin-inline-end: 10px;
         color: $main-clr;
       }
     }
@@ -1698,5 +1762,216 @@ footer {
     .links {
       text-align: left;
     }
+  }
+}
+
+/* dark mode */
+body.dark-mode {
+  $blue: #2196f3;
+  $blue-alt: #1787e0;
+  $white: #fff;
+  $white-alt: #ececec;
+  $white-alt2: #ddd;
+  $white-alt3: #aaa;
+  $gray1: #444;
+  $gray2: #555;
+  $bg1: #1b262c;
+  $bg2: #0d171d;
+  $bg3: #2b2b2b;
+  .main-title {
+    color: $white;
+    border-color: $white;
+  }
+  header {
+    background-color: $bg1;
+    .container nav .links,
+    .container .mega-menu menu {
+      li,
+      li a,
+      li i {
+        color: $white;
+      }
+      li:hover {
+        background: $white;
+        a,
+        i {
+          color: $bg1;
+        }
+      }
+    }
+    .container .mega-menu {
+      background-color: $bg1;
+    }
+  }
+  .landing {
+    background: $bg1;
+    color: $white;
+    &::after {
+      background: $bg2;
+    }
+    p {
+      color: #8f8f8f !important;
+    }
+  }
+  .articles {
+    background: $bg2;
+    .container .wrapper {
+      background-color: $bg1;
+      color: $white;
+      .content p {
+        color: $white-alt3;
+      }
+    }
+  }
+  .gallery {
+    background: $bg1;
+  }
+  .spikes::after {
+    color: $bg2;
+  }
+  .features {
+    background: $bg2;
+    .container .box .wrapper {
+      background: $bg3;
+      color: $white;
+      p {
+        color: $white-alt;
+      }
+    }
+  }
+  .testimonials {
+    background: $bg1;
+  }
+  .team {
+    background: $bg2;
+  }
+  .services {
+    background: $bg1;
+  }
+  .skills {
+    background: $bg2;
+  }
+  .how-it-works {
+    background: $bg1;
+  }
+  .events {
+    background: $bg2;
+  }
+  .plans {
+    background: $bg1;
+  }
+  .videos {
+    background: $bg2;
+  }
+  .stats {
+    background: $bg1;
+  }
+  .discount .right {
+    background: $bg1;
+  }
+  .features .container .box .wrapper {
+    border-color: #000;
+  }
+  .gallery .container .wrapper {
+    background: $bg2;
+  }
+  .gallery .container .wrapper::before {
+    background: #0d171d38;
+  }
+  .testimonials .container .wrapper {
+    color: #fff;
+    background-color: #344350;
+  }
+  .testimonials .container .wrapper .title {
+    color: #c1c1c1;
+  }
+  .testimonials .container .wrapper p {
+    color: #b0b0b0;
+  }
+  .team .container .wrapper .info p {
+    color: #ececec;
+  }
+  .team .container .wrapper::after {
+    background-color: $bg3;
+  }
+  .services .container .box .wrapper {
+    background-color: $bg3;
+  }
+  .services .container .box .info::before {
+    background: $gray1;
+  }
+  .services .container .box .cover::before,
+  .services .container .box .cover::after {
+    background-color: $gray1;
+  }
+  .skills .container .skill h3 {
+    color: $white;
+  }
+  .skills .container .skill h3 .percent {
+    color: $white-alt;
+  }
+  .how-it-works .container .box {
+    background-color: $gray2;
+    border: 2px solid $gray1;
+  }
+  .how-it-works .container .box p {
+    color: #cacaca;
+    transition: 300ms;
+  }
+  .how-it-works .container .box:hover p {
+    color: $gray1;
+  }
+  .events .container .time .unit {
+    border: 1px solid #d4d4d4;
+    background: $bg3;
+    span {
+      color: $white-alt;
+    }
+  }
+  .events .container .title {
+    color: $white;
+  }
+  .events .container .description {
+    color: $white-alt;
+  }
+  .events .container .subscribe {
+    background-color: $white-alt3;
+  }
+  .plans .container .wrapper {
+    background: $bg3;
+    color: $white;
+    .time {
+      color: $white-alt;
+    }
+  }
+  .plans .container .wrapper .label::after {
+    color: $bg3;
+  }
+  .videos .left {
+    background-color: $bg1;
+    color: $white-alt;
+    li span {
+      color: $white-alt2;
+    }
+  }
+  .videos .right .description {
+    background-color: $white-alt3;
+  }
+  .videos .right {
+    background-color: $bg3;
+  }
+  .videos .left header {
+    background-color: $bg3;
+  }
+  .plans .container .wrapper::before,
+  .plans .container .wrapper::after {
+    background: $bg1;
+  }
+  .plans .container .wrapper.popular:hover .label::after {
+    color: $bg1;
+  }
+  .discount .left,
+  .discount .right {
+    color: $white;
   }
 }

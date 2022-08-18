@@ -1,0 +1,209 @@
+body.dark-mode {
+  $blue: #2196f3;
+  $blue-alt: #1787e0;
+  $white: #fff;
+  $white-alt: #ececec;
+  $white-alt2: #ddd;
+  $white-alt3: #aaa;
+  $gray1: #444;
+  $gray2: #555;
+  $bg1: #1b262c;
+  $bg2: #0d171d;
+  $bg3: #2b2b2b;
+  .main-title {
+    color: $white;
+    border-color: $white;
+  }
+  header {
+    background-color: $bg1;
+    .container nav .links,
+    .container .mega-menu menu {
+      li,
+      li a,
+      li i {
+        color: $white;
+      }
+      li:hover {
+        background: $white;
+        a,
+        i {
+          color: $bg1;
+        }
+      }
+    }
+    .container .mega-menu {
+      background-color: $bg1;
+    }
+  }
+  .landing {
+    background: $bg1;
+    color: $white;
+    &::after {
+      background: $bg2;
+    }
+    p {
+      color: #8f8f8f !important;
+    }
+  }
+  .articles {
+    background: $bg2;
+    .container .wrapper {
+      background-color: $bg1;
+      color: $white;
+      .content p {
+        color: $white-alt3;
+      }
+    }
+  }
+  .gallery {
+    background: $bg1;
+  }
+  .spikes::after {
+    color: $bg2;
+  }
+  .features {
+    background: $bg2;
+    .container .box .wrapper {
+      background: $bg3;
+      color: $white;
+      p {
+        color: $white-alt;
+      }
+    }
+  }
+  .testimonials {
+    background: $bg1;
+  }
+  .team {
+    background: $bg2;
+  }
+  .services {
+    background: $bg1;
+  }
+  .skills {
+    background: $bg2;
+  }
+  .how-it-works {
+    background: $bg1;
+  }
+  .events {
+    background: $bg2;
+  }
+  .plans {
+    background: $bg1;
+  }
+  .videos {
+    background: $bg2;
+  }
+  .stats {
+    background: $bg1;
+  }
+  .discount .right {
+    background: $bg1;
+  }
+  .features .container .box .wrapper {
+    border-color: #000;
+  }
+  .gallery .container .wrapper {
+    background: $bg2;
+  }
+  .gallery .container .wrapper::before {
+    background: #0d171d38;
+  }
+  .testimonials .container .wrapper {
+    color: #fff;
+    background-color: #344350;
+  }
+  .testimonials .container .wrapper .title {
+    color: #c1c1c1;
+  }
+  .testimonials .container .wrapper p {
+    color: #b0b0b0;
+  }
+  .team .container .wrapper .info p {
+    color: #ececec;
+  }
+  .team .container .wrapper::after {
+    background-color: $bg3;
+  }
+  .services .container .box .wrapper {
+    background-color: $bg3;
+  }
+  .services .container .box .info::before {
+    background: $gray1;
+  }
+  .services .container .box .cover::before,
+  .services .container .box .cover::after {
+    background-color: $gray1;
+  }
+  .skills .container .skill h3 {
+    color: $white;
+  }
+  .skills .container .skill h3 .percent {
+    color: $white-alt;
+  }
+  .how-it-works .container .box {
+    background-color: $gray2;
+    border: 2px solid $gray1;
+  }
+  .how-it-works .container .box p {
+    color: #cacaca;
+    transition: 300ms;
+  }
+  .how-it-works .container .box:hover p {
+    color: $gray1;
+  }
+  .events .container .time .unit {
+    border: 1px solid #d4d4d4;
+    background: $bg3;
+    span {
+      color: $white-alt;
+    }
+  }
+  .events .container .title {
+    color: $white;
+  }
+  .events .container .description {
+    color: $white-alt;
+  }
+  .events .container .subscribe {
+    background-color: $white-alt3;
+  }
+  .plans .container .wrapper {
+    background: $bg3;
+    color: $white;
+    .time {
+      color: $white-alt;
+    }
+  }
+  .plans .container .wrapper .label::after {
+    color: $bg3;
+  }
+  .videos .left {
+    background-color: $bg1;
+    color: $white-alt;
+    li span {
+      color: $white-alt2;
+    }
+  }
+  .videos .right .description {
+    background-color: $white-alt3;
+  }
+  .videos .right {
+    background-color: $bg3;
+  }
+  .videos .left header {
+    background-color: $bg3;
+  }
+  .plans .container .wrapper::before,
+  .plans .container .wrapper::after {
+    background: $bg1;
+  }
+  .plans .container .wrapper.popular:hover .label::after {
+    color: $bg1;
+  }
+  .discount .left,
+  .discount .right {
+    color: $white;
+  }
+}

@@ -1,3 +1,4 @@
+const b = document.body;
 /* Make The mega-menu Active On Hover */
 const showMegaMenuEl = document.getElementById("show-mega-menu");
 const megaMenuEl = document.querySelector(".mega-menu");
@@ -52,7 +53,7 @@ const activateEventListenersForVideos = () => {
   const description = document.getElementById(`video-description`);
   videos.forEach(video => video.addEventListener(`click`, () => {
     if (youtubeVideoPlayer.classList.contains(`disabled`)) {
-      const image =youtubeVideoPlayer.previousElementSibling.style.display = `none`
+      const image = youtubeVideoPlayer.previousElementSibling.style.display = `none`;
       youtubeVideoPlayer.classList.remove(`disabled`);
     }
     youtubeVideoPlayer.src = video.dataset.src;
@@ -116,27 +117,45 @@ window.addEventListener(`scroll`, (e) => {
 
 /* Events Dynamic Date */
 const eventDate = document.getElementById(`event-date`);
-eventDate.textContent = `Tech Masters Event ${new Date().getFullYear() + 1}`;
+if (b.dataset.lang === `ar`)
+  eventDate.textContent = `حدث أساتذة التكنولوجيا ${new Date().getFullYear() + 1}`;
+else
+  eventDate.textContent = `Tech Masters Event ${new Date().getFullYear() + 1}`;
 
 /* Features Section Animation */
 const features = document.querySelectorAll(`#features .box`);
 const animateFeature = (feature) => {
-  if (feature.classList.contains(`quality`)) feature.style.transform = `translateX(-200px)`;
-  else if (feature.classList.contains(`time`)) feature.style.transform = `translateY(100px)`;
-  else if (feature.classList.contains(`passion`)) feature.style.transform = `translateX(200px)`;
+  const el = feature.querySelector(`.wrapper`);
+  if (feature.classList.contains(`quality`)) {
+    if (b.dataset.lang === `ar`)
+      el.style.transform = `translateX(200px)`;
+    else
+      el.style.transform = `translateX(-200px)`;
+  }
+  else if (feature.classList.contains(`time`)) {
+    if (window.innerWidth <= 992 && window.innerWidth > 584) {
+      el.style.transform = `translateY(calc(100% + 40px))`;
+    } else if (window.innerWidth > 584) {
+      el.style.transform = `translateY(100px)`;
+    }
+  }
+  else if (feature.classList.contains(`passion`)) {
+    if (b.dataset.lang === `ar`)
+      el.style.transform = `translateX(-200px)`;
+    else
+      el.style.transform = `translateX(200px)`;
+  }
 };
 const featuresObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
+    const el = entry.target.querySelector(`.wrapper`);
     if (!entry.isIntersecting) {
       animateFeature(entry.target);
       return;
     }
-    entry.target.style.transform = `none`;
+    el.style.transform = `none`;
   });
-}, {
-  threshold: 0.2,
-  rootMargin: `100px`
-});
+}, { threshold: 0.3 });
 features.forEach(feature => {
   animateFeature(feature);
   featuresObserver.observe(feature);
@@ -198,13 +217,15 @@ const lazyLoadObserver = new IntersectionObserver(entries => {
     const blob = await res.blob();
     entry.target.src = URL.createObjectURL(blob);
   });
-});
+}, { rootMargin: `500px` });
 [...document.images].forEach(image => lazyLoadObserver.observe(image));
 
 /* Accessibility */
 document.querySelectorAll(`#testimonials`).forEach(testimonial => testimonial.setAttribute(`aria-hidden`, `true`));
-document.body.querySelectorAll(`*`).forEach(e => e.lang = `en`);
-
+if (b.dataset.lang === `ar`)
+  document.body.querySelectorAll(`*`).forEach(e => e.lang = `ar`);
+else
+  document.body.querySelectorAll(`*`).forEach(e => e.lang = `en`);
 /* Gallery Sections Animation */
 const galleries = document.querySelectorAll(`#gallery .box`);
 const animateGallery = (gallery) => {
@@ -237,7 +258,7 @@ const articleObserver = new IntersectionObserver(entries => {
       animateArticle(el);
       return;
     }
-    el.style.removeProperty(`transform`)
+    el.style.removeProperty(`transform`);
     el.style.opacity = `1`;
   });
 }, { threshold: 0.5 });
@@ -246,6 +267,12 @@ articles.forEach(article => articleObserver.observe(article));
 /* Pricing Plans Sections Animation */
 const plans = document.querySelectorAll(`#plans .box`);
 const animatePlan = (plan) => {
+  if (b.dataset.lang === `ar`) {
+    if (plan.classList.contains(`basic`)) plan.style.transform = `translateX(200px)`;
+    else if (plan.classList.contains(`advanced`)) plan.style.setProperty(`transform`, `translateY(100px)`);
+    else if (plan.classList.contains(`professional`)) plan.style.transform = `translateX(-200px)`;
+    return;
+  }
   if (plan.classList.contains(`basic`)) plan.style.transform = `translateX(-200px)`;
   else if (plan.classList.contains(`advanced`)) plan.style.setProperty(`transform`, `translateY(100px)`);
   else if (plan.classList.contains(`professional`)) plan.style.transform = `translateX(200px)`;
@@ -270,4 +297,17 @@ const plansObserver = new IntersectionObserver(entries => {
 plans.forEach(plan => {
   animatePlan(plan);
   plansObserver.observe(plan);
+});
+
+/* Dark Mode */
+const darkModeBtn = document.getElementById(`dark-mode`);
+darkModeBtn.addEventListener(`click`, () => {
+  b.classList.toggle(`dark-mode`);
+});
+
+/* settings button */
+const settingsBtn = document.getElementById(`settings-btn`);
+const settings = document.getElementById(`settings`);
+settingsBtn.addEventListener(`click`, () => {
+  settings.classList.toggle(`active`);
 });
