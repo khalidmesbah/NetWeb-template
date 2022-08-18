@@ -1,0 +1,158 @@
+@use "variables" as *;
+@use "mixins" as *;
+header {
+  position: relative;
+  box-shadow: 0 0 10px $helper-clr;
+  background: $main-bg;
+  border-bottom: 1px solid $helper-clr;
+  z-index: 1;
+  &.fixed {
+    position: fixed;
+    z-index: 3;
+    width: 100%;
+  }
+  .container {
+    position: relative;
+    .logo {
+      color: $main-clr;
+      cursor: pointer;
+      font-size: 26px;
+      height: 50px;
+      font-weight: bold;
+      @include center-flex();
+    }
+    .links {
+      @include flex(center);
+      height: 40px;
+      li {
+        height: 100%;
+        position: relative;
+        &::before {
+          position: absolute;
+          content: "";
+          top: 0;
+          left: 0;
+          width: 0;
+          height: 4px;
+          background: $main-clr;
+          transition: $main-transition;
+        }
+        &:hover {
+          background-color: #fafafa;
+          a {
+            color: $main-clr;
+          }
+          &::before {
+            width: 100%;
+          }
+        }
+      }
+      a {
+        text-transform: capitalize;
+        @include center-flex();
+        color: black;
+        transition: $main-transition;
+        font-size: 14px;
+        padding: 10px;
+        height: 100%;
+      }
+    }
+    .mega-menu {
+      z-index: -1;
+      opacity: 0;
+      pointer-events: none;
+      top: calc(100% + 30px);
+      .image {
+        min-width: 330px;
+        display: none;
+        img {
+          max-height: 100%;
+          width: 100%;
+        }
+      }
+      position: absolute;
+      background: $main-bg;
+      z-index: 1;
+      width: 100%;
+      top: 100%;
+      left: 0;
+      padding: 5px;
+      border-bottom: 3px solid $main-clr-alt;
+      border-top: 1px solid #e9e6e6;
+      transition: top $main-transition, opacity $main-transition;
+      menu {
+        cursor: pointer;
+        li {
+          transition: $main-transition;
+          &:not(:last-child) {
+            border-bottom: 1px solid #e9e6e6;
+          }
+          a {
+            padding: 15px;
+            height: 50px;
+            color: $main-clr;
+            font-size: 18px;
+            font-weight: bold;
+            display: block;
+            padding-bottom: 36px;
+            i {
+              margin-inline-end: 10px;
+            }
+          }
+        }
+      }
+      &-active {
+        z-index: 1;
+        opacity: 1;
+        top: 100%;
+        pointer-events: all;
+      }
+    }
+  }
+  @media (min-width: 768px) {
+    .container {
+      @include flex(space-between);
+      height: 72px;
+      .logo {
+        @include center-flex();
+        height: 100%;
+      }
+      .links {
+        height: 100%;
+        display: flex;
+        a {
+          font-size: 18px;
+          padding: 0 30px;
+        }
+      }
+      .mega-menu {
+        @include flex(center, $g: 40);
+        padding: 30px;
+        & > * {
+          width: 100%;
+        }
+        menu li {
+          width: 100%;
+        }
+      }
+    }
+  }
+  @media (min-width: 992px) {
+    .container .mega-menu .image {
+      display: block;
+    }
+  }
+  @media (min-width: 1200px) {
+    .container .mega-menu .image {
+      min-width: 523px;
+    }
+  }
+  [data-lang="ar"] & {
+    .container .links li::before {
+      right: 0;
+    }
+    .container .links a {
+      white-space: nowrap;
+    }
+  }
+}

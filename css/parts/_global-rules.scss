@@ -1,0 +1,141 @@
+@use "variables" as *;
+@use "mixins" as *;
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+@supports (scroll-behavior: smooth) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+body {
+  font-family: "Cairo", sans-serif;
+  &[data-lang="ar"] {
+    direction: rtl;
+    overflow-x: hidden;
+  }
+}
+a {
+  text-decoration: none;
+}
+menu {
+  list-style: none;
+}
+.container {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* Small */
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+/* Medium */
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+/* Large */
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+/* main title */
+.main-title {
+  text-transform: uppercase;
+  margin: 0 auto 80px;
+  border: 2px solid black;
+  padding: 10px 20px;
+  font-size: clamp(16px, 5vw, 30px);
+  width: -moz-fit-content;
+  width: fit-content;
+  position: relative;
+  z-index: 1;
+  transition: $main-transition;
+  &::before,
+  &::after {
+    content: "";
+    width: 12px;
+    height: 12px;
+    background-color: $main-clr;
+    position: absolute;
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  &::before {
+    left: -30px;
+  }
+  &::after {
+    right: -30px;
+  }
+  &:hover {
+    color: white;
+    border: 2px solid white;
+    transition-delay: 0.5s;
+    &::before {
+      z-index: -1;
+      animation: left-move 0.5s linear forwards;
+    }
+    &::after {
+      z-index: -1;
+      animation: right-move 0.5s linear forwards;
+    }
+  }
+  @keyframes right-move {
+    to {
+      width: 55%;
+      height: 100%;
+      border-radius: inherit;
+      right: 0;
+    }
+  }
+  @keyframes left-move {
+    to {
+      width: 55%;
+      height: 100%;
+      border-radius: inherit;
+      left: 0;
+    }
+  }
+}
+img {
+  max-width: 100%;
+  max-height: 100%;
+  min-width: 20px;
+  min-height: 20px;
+  width: 100%;
+  height: 100%;
+}
+.spikes {
+  position: relative;
+  background: #2c3e50;
+  &::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    left: -0%;
+    top: 100%;
+    display: block;
+    height: 50px;
+    color: $main-bg;
+    background-image: linear-gradient(135deg, currentcolor 25%, transparent 25%),
+      linear-gradient(225deg, currentcolor 25%, transparent 25%);
+    background-size: 50px 100%;
+    background-position: 0 0;
+  }
+}
+section {
+  overflow: hidden;
+}

@@ -1,0 +1,84 @@
+@use "variables" as *;
+@use "mixins" as *;
+.how-it-works {
+  @include section-padding();
+  background: $sec-bg;
+  .container {
+    @include flex($d: column, $g: 20);
+    [data-lang="ar"] & {
+      @media (min-width: 768px) {
+        .box {
+          text-align: right;
+        }
+      }
+    }
+    .image {
+      text-align: center;
+      width: 100%;
+      img {
+        max-width: 450px;
+        margin-bottom: 50px;
+      }
+    }
+    .box {
+      text-align: center;
+      background-color: #f6f5f5;
+      padding: 30px;
+      margin-bottom: 20px;
+      border-radius: 6px;
+      @include flex(center, center, column);
+      border: 2px solid white;
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+      &::after {
+        position: absolute;
+        content: "";
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: #e7e7e7;
+        z-index: -1;
+        transition: 600ms;
+        transform: scale(0);
+      }
+      &:hover::after {
+        transform: scale(15);
+      }
+      img {
+        max-width: 64px;
+        margin-bottom: 30px;
+      }
+      h3 {
+        margin: 0;
+        font-size: 22px;
+      }
+      p {
+        color: #444;
+        line-height: 1.7;
+        margin: 10px 0 0;
+        font-size: 18px;
+      }
+    }
+  }
+  @media (min-width: 768px) {
+    .container .box {
+      flex-direction: row;
+      text-align: left;
+      gap: 30px;
+      img {
+        margin-bottom: 0;
+      }
+    }
+  }
+  @media (min-width: 992px) {
+    .container {
+      flex-direction: row;
+      align-items: center;
+      .image img {
+        margin-inline-end: 80px;
+        margin-bottom: 0;
+      }
+    }
+  }
+}

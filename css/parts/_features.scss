@@ -1,0 +1,118 @@
+@use "variables" as *;
+@use "mixins" as *;
+.features {
+  @include section-padding();
+  background: $main-bg;
+  .container {
+    @include grid-fit();
+    .box {
+      .wrapper {
+        text-align: center;
+        border: 1px solid #ccc;
+        height: min-content;
+        transition: $main-transition;
+      }
+      .image {
+        position: relative;
+        clip-path: polygon(0 0, 100% 0%, 100% 53%, 0% 87%);
+        transition: $main-transition;
+        overflow: hidden;
+        height: 50%;
+        margin-bottom: 5px;
+        &::before {
+          content: "";
+          position: absolute;
+          left: 0;
+          top: -1px;
+          width: 100%;
+          height: 100%;
+          opacity: 0.6;
+        }
+      }
+      h2 {
+        position: relative;
+        font-size: 40px;
+        margin: auto;
+        width: -moz-fit-content;
+        width: fit-content;
+        @include flex(center);
+        &::after {
+          position: absolute;
+          content: "";
+          width: calc(100% - 30px);
+          height: 5px;
+          bottom: -50%;
+        }
+      }
+      p {
+        line-height: 2;
+        font-size: 20px;
+        margin: 30px 0;
+        padding: 25px;
+        color: #444;
+      }
+      a {
+        display: block;
+        border: 3px solid transparent;
+        width: -moz-fit-content;
+        width: fit-content;
+        margin: 0 auto 30px;
+        font-weight: bold;
+        font-size: 22px;
+        padding: 10px 30px;
+        border-radius: 6px;
+        transition: $main-transition;
+        background-position: right bottom;
+        background-size: 200% 100%;
+      }
+      &.quality {
+        .image::before {
+          background: #f44036;
+        }
+        h2::after {
+          background: #f44036;
+        }
+        a {
+          border: 3px solid #f44036;
+          color: #f44036;
+          background-image: linear-gradient(90deg, #f44036 50%, 0, $main-bg);
+        }
+      }
+      &.time {
+        .image::before {
+          background: #009688;
+        }
+        h2::after {
+          background: #009688;
+        }
+        a {
+          border: 3px solid #009688;
+          color: #009688;
+          background-image: linear-gradient(90deg, #009688 50%, 0, $main-bg);
+        }
+      }
+      &.passion {
+        .image::before {
+          background: #0088c8;
+        }
+        h2::after {
+          background: #0088c8;
+        }
+        a {
+          border: 3px solid #0088c8;
+          color: #0088c8;
+          background-image: linear-gradient(90deg, #0088c8 50%, 0, $main-bg);
+        }
+      }
+      &:hover {
+        .image {
+          clip-path: polygon(0 53%, 0 0, 100% 0, 100% 87%);
+        }
+        a {
+          color: $main-bg;
+          background-position: left bottom;
+        }
+      }
+    }
+  }
+}

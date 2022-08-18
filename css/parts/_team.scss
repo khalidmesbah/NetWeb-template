@@ -1,0 +1,85 @@
+@use "variables" as *;
+@use "mixins" as *;
+.team {
+  @include section-padding();
+  background: $main-bg;
+  .container {
+    @include grid-fit();
+    .wrapper {
+      padding-top: 60px;
+      position: relative;
+      transition: $main-transition;
+      border-radius: 10px;
+      overflow: hidden;
+      [data-lang="ar"] & {
+        &::after {
+          left: 0;
+          right: initial;
+        }
+      }
+      .data {
+        display: flex;
+        .links {
+          width: 60px;
+          @include flex(center, $d: column, $g: 20);
+          a {
+            width: 100%;
+            text-align: center;
+            &:hover i {
+              color: $main-clr;
+            }
+          }
+          i {
+            color: #777;
+            transition: $main-transition;
+          }
+        }
+        img {
+          width: calc(100% - 60px);
+          transition: $main-transition;
+          border-radius: 10px;
+        }
+      }
+      .info {
+        padding-inline-start: 60px;
+        padding-inline-end: 0;
+        padding-block-start: 10px;
+        padding-block-end: 10px;
+        h3 {
+          margin-top: 22px;
+          margin-bottom: 10px;
+          color: $main-clr;
+          font-size: 22px;
+          transition: $main-transition;
+        }
+        p {
+          margin-bottom: 25px;
+        }
+      }
+      &::after {
+        position: absolute;
+        content: "";
+        top: 0;
+        right: 0;
+        width: 0%;
+        height: 100%;
+        z-index: -1;
+        background-color: #e4e4e4;
+        border-radius: 10px;
+        transition: $main-transition;
+      }
+      &:hover {
+        .data img {
+          filter: grayscale(100%);
+        }
+        .info h3 {
+          color: #777;
+        }
+        &::after {
+          width: calc(100% - 40px);
+          filter: grayscale(100%);
+        }
+      }
+    }
+  }
+}

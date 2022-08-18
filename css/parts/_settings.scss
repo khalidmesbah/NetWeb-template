@@ -1,0 +1,71 @@
+@use "variables" as *;
+@use "mixins" as *;
+.settings {
+  position: fixed;
+  @include flex($g: 5, $d: column);
+  top: 200px;
+  width: 150px;
+  font-size: 20px;
+  height: fit-content;
+  z-index: 4;
+  padding: 10px;
+  text-transform: capitalize;
+  color: $white;
+  background: $main-clr;
+  transition: $main-transition;
+  left: -150px;
+  &.active {
+    left: 0;
+  }
+  .btn {
+    position: absolute;
+    right: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 50px;
+    width: 25px;
+    background: inherit;
+    border-end-end-radius: 25px;
+    border-start-end-radius: 25px;
+    z-index: -1;
+    @include center-flex();
+    &:hover::after {
+      color: $sec-bg;
+    }
+    &::after {
+      position: absolute;
+      content: "";
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      box-shadow: 0 -10px, 0 10px;
+      background: currentColor;
+      transition: $main-transition;
+    }
+  }
+  a,
+  a:visited,
+  a:active {
+    color: inherit;
+    &:hover {
+      color: $sec-bg;
+    }
+  }
+  * {
+    all: unset;
+    cursor: pointer;
+    &:hover {
+      color: $sec-bg;
+    }
+  }
+  [data-lang="ar"] & {
+    right: -150px;
+    &.active {
+      right: 0;
+    }
+    .btn {
+      left: -20px;
+      right: initial;
+    }
+  }
+}

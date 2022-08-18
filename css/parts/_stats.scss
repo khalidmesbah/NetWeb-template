@@ -1,0 +1,83 @@
+@use "variables" as *;
+@use "mixins" as *;
+.stats {
+  @include section-padding();
+  background: $sec-bg;
+  .container {
+    @include grid-fill();
+    gap: 20px;
+  }
+  .box {
+    background-color: white;
+    padding: 30px 15px;
+    text-align: center;
+    position: relative;
+    opacity: 0.8;
+    transition: $main-transition;
+    &::before,
+    &::after {
+      position: absolute;
+      content: "";
+      height: 0%;
+      width: 2px;
+      background: $main-clr;
+      transition: 1000ms;
+    }
+    &::before {
+      top: 0;
+      left: 0;
+    }
+    &::after {
+      bottom: 0;
+      right: 0;
+    }
+    &:hover {
+      opacity: 1;
+      &::before,
+      &::after {
+        height: 100%;
+      }
+      .animation-top-bottom-helper::after,
+      .animation-top-bottom-helper::before {
+        width: 100%;
+      }
+    }
+    .animation-top-bottom-helper {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      &::before,
+      &::after {
+        position: absolute;
+        content: "";
+        height: 2px;
+        width: 0%;
+        background: $main-clr;
+        transition: 1000ms;
+      }
+      &::after {
+        bottom: 0;
+        left: 0;
+      }
+      &::before {
+        top: 0;
+        right: 0;
+      }
+    }
+  }
+  .number {
+    display: block;
+    font-size: 50px;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .text {
+    color: $main-clr;
+    font-style: italic;
+    font-size: 20px;
+    font-weight: bold;
+  }
+}

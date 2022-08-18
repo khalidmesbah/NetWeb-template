@@ -1,0 +1,73 @@
+@use "variables" as *;
+@use "mixins" as *;
+.videos {
+  @include section-padding();
+  background: $main-bg;
+  .wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid $helper-clr;
+  }
+  img {
+    height: fit-content;
+  }
+  .left {
+    flex-grow: 1;
+    background: $main-bg;
+    min-width: 300px;
+    header {
+      @include flex(space-between, center);
+      padding: 20px;
+      width: 100%;
+      background-color: #f4f4f4;
+      font-weight: bold;
+      color: $main-clr-alt;
+      i {
+        cursor: pointer;
+      }
+    }
+    li {
+      padding: 20px;
+      border-top: 1px solid $helper-clr;
+      cursor: pointer;
+      transition: $main-transition;
+      span {
+        display: block;
+        margin-top: 10px;
+        color: #666;
+        transition: $main-transition;
+      }
+      &:hover {
+        color: $main-clr;
+        span {
+          margin-left: 5px;
+        }
+      }
+    }
+  }
+  .right {
+    padding: 10px;
+    flex-grow: 8;
+    width: 100%;
+    background-color: #e2e2e2;
+    @include flex(space-around,center,column,10);
+    iframe {
+      width: 100%;
+      aspect-ratio: 16/9;
+      &.disabled {
+        display: none;
+      }
+    }
+    .description {
+      text-align: center;
+      padding: 10px;
+      font-size: 25px;
+      background-color: white;
+    }
+  }
+  @media (min-width: 992px) {
+    .wrapper {
+      flex-wrap: nowrap;
+    }
+  }
+}

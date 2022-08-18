@@ -1,0 +1,111 @@
+@use "variables" as *;
+@use "mixins" as *;
+.discount {
+  .wrapper {
+    @include flex($d:column);
+    min-height: 100vh;
+    text-align: center;
+  }
+  .left,
+  .right {
+    @include center-flex();
+    flex-basis: 50%;
+  }
+  .content {
+    @include flex(center,center,column);
+  }
+  .left {
+    color: #222;
+    padding: 0 20px;
+    position: relative;
+    &::before,
+    &::after {
+      position: absolute;
+      content: "";
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+    }
+    &::after {
+      background: rgb(23 135 224 / 97%)
+        url("../images/discount-background.avif");
+      background-size: cover;
+      z-index: -2;
+    }
+    &::before {
+      background-color: rgb(23 135 224 / 97%);
+      z-index: -1;
+    }
+    h2 {
+      font-size: 40px;
+      letter-spacing: -2px;
+      margin-block-start: 0.83em;
+      margin-block-end: 0.83em;
+    }
+    p {
+      line-height: 1.6;
+      font-size: 18px;
+      max-width: 500px;
+      margin-block-start: 1em;
+      margin-block-end: 1em;
+    }
+    img {
+      min-width: 250px;
+      max-width: 300px;
+      width: 100%;
+    }
+  }
+  .right {
+    padding: 20px;
+    background: $main-bg;
+    .content {
+      width: 70%;
+      max-width: 400px;
+      padding-bottom: 50px;
+    }
+    h2 {
+      font-size: 40px;
+      letter-spacing: -2px;
+      margin-block-start: 0.83em;
+      margin-block-end: 0.83em;
+    }
+    * {
+      outline: none;
+      width: 100%;
+      min-width: 250px;
+    }
+    input:not([type="submit"]),
+    textarea {
+      display: block;
+      margin-bottom: 25px;
+      padding: 15px;
+      border: none;
+      border-bottom: 1px solid #ccc;
+      background-color: #f9f9f9;
+      caret-color: $main-clr;
+      &::placeholder {
+        text-transform: capitalize;
+      }
+    }
+    textarea {
+      resize: none;
+    }
+    [type="submit"] {
+      display: block;
+      padding: 15px;
+      background-color: $main-clr;
+      color: white;
+      font-weight: bold;
+      font-size: 20px;
+      border: none;
+      cursor: pointer;
+      transition: $main-transition;
+    }
+  }
+  @media (min-width: 992px) {
+    .wrapper {
+      flex-direction: row;
+    }
+  }
+}

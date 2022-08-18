@@ -1,0 +1,121 @@
+@use "variables" as *;
+@use "mixins" as *;
+.landing {
+  background: $sec-bg;
+  height: calc(100vh - 72px);
+  position: relative;
+  &::after {
+    position: absolute;
+    content: "";
+    left: -100%;
+    right: -100%;
+    bottom: -100px;
+    height: 230px;
+    transform: rotate(-6deg);
+    background: $main-bg;
+  }
+  .container {
+    height: 100%;
+    @include center-flex();
+    padding-bottom: 120px;
+    height: 100%;
+    text-align: center;
+    & > * {
+      width: 100%;
+    }
+    .text {
+      @include flex(center,center,column);
+      [data-lang="ar"] & {
+        @media (min-width: 992px) {
+          text-align: right;
+        }
+      }
+      h1 {
+        font-size: 28px;
+        letter-spacing: -2px;
+        margin: 0;
+      }
+      p {
+        font-size: 18px;
+        color: #666;
+        max-width: 500px;
+        line-height: 1.7;
+        margin: 10px;
+      }
+    }
+    .image {
+      display: none;
+      img {
+        width: 600px;
+        min-width: 600px;
+        position: relative;
+        animation: up-and-down 5s linear infinite;
+      }
+      @keyframes up-and-down {
+        0%,
+        100% {
+          top: 0;
+        }
+        50% {
+          top: -50px;
+        }
+      }
+    }
+    .go-down {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      transition: $main-transition;
+      color: $main-clr;
+      z-index: 1;
+      &:hover {
+        color: #838aff;
+      }
+      i {
+        animation: bouncing 1.5s infinite;
+        @keyframes bouncing {
+          20%,
+          50%,
+          80% {
+            transform: translateY(0);
+          }
+          40%,
+          60% {
+            transform: translateY(-15px);
+          }
+        }
+      }
+    }
+  }
+  @media (min-width: 768px) {
+    .container .text {
+      h1 {
+        font-size: 40px;
+      }
+      p {
+        font-size: 23px;
+        margin-top: 10px;
+      }
+    }
+  }
+  @media (min-width: 992px) {
+    .container {
+      justify-content: start;
+    }
+    .container .text {
+      align-items: flex-start;
+      text-align: left;
+      h1 {
+        margin-bottom: 0;
+      }
+      p {
+        margin: 0;
+        margin-top: 5px;
+      }
+    }
+    .container .image {
+      display: block;
+    }
+  }
+}

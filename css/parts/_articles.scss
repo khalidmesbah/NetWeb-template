@@ -1,0 +1,54 @@
+@use "variables" as *;
+@use "mixins" as *;
+.articles {
+  @include section-padding();
+  background: $main-bg;
+  position: relative;
+  .container {
+    @include grid-fit();
+    .wrapper {
+      box-shadow: 0 2px 15px rgb(0 0 0 / 10%);
+      background-color: white;
+      border-radius: 6px;
+      overflow: hidden;
+      transition: $main-transition;
+      .content {
+        padding: 20px;
+        p {
+          margin: 10px 0 0;
+          line-height: 1.5;
+          color: #444;
+        }
+      }
+      .info {
+        padding: 20px;
+        border-top: 1px solid #e6e6e7;
+        @include flex(space-between,center);
+        color: #0067bc;
+        [data-lang="ar"] & {
+          .arrow {
+            transform: scaleX(-1);
+          }
+        }
+        a,
+        a:visited,
+        a:active {
+          color: inherit;
+          font-weight: bold;
+        }
+      }
+      &:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 2px 15px rgb(0 0 0 / 20%);
+        .info i {
+          animation: moving-arrow 0.6s linear infinite;
+        }
+        @keyframes moving-arrow {
+          to {
+            transform: translateX(10px);
+          }
+        }
+      }
+    }
+  }
+}

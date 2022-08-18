@@ -1,0 +1,43 @@
+@use "variables" as *;
+@use "mixins" as *;
+.testimonials {
+  @include section-padding();
+  background: $sec-bg;
+  .container {
+    @include grid-fit();
+    row-gap: 60px;
+    .wrapper {
+      position: relative;
+      padding: 20px;
+      @include flex($d: column, $g: 10);
+      box-shadow: 0 2px 4px #00000012;
+      border-radius: 6px;
+      transition: $main-transition;
+      background-color: #d0d7dd;
+      img {
+        position: absolute;
+        right: -10px;
+        top: -50px;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        border: 10px solid $sec-bg;
+        [data-lang="ar"] & {
+          left: -10px;
+          right: initial;
+        }
+      }
+      .title {
+        color: #333;
+        display: block;
+      }
+      .filled {
+        color: #ffc107;
+      }
+      p {
+        line-height: 1.5;
+        color: #555;
+      }
+    }
+  }
+}

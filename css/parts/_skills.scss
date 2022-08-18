@@ -1,0 +1,60 @@
+@use "variables" as *;
+@use "mixins" as *;
+.skills {
+  @include section-padding();
+  background: $main-bg;
+  .container {
+    @include flex(space-between);
+    [data-lang="ar"] & {
+      .skill .progress-bar .fill {
+        right: 0;
+      }
+      .image {
+        transform: scaleX(-1);
+      }
+    }
+    .image {
+      width: 500px;
+      display: none;
+    }
+    .skill {
+      width: 100%;
+      h3 {
+        @include flex(space-between, center);
+        margin: 16px 0;
+        .percent {
+          font-size: 12px;
+          border: 1px solid #ccc;
+          padding: 3px 5px;
+          border-radius: 4px;
+          color: #333;
+        }
+      }
+      .progress-bar {
+        width: 100%;
+        height: 30px;
+        background-color: #eee;
+        position: relative;
+        .fill {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 0;
+          height: 100%;
+          background-color: $main-clr;
+          transition: width 0.5s linear;
+        }
+      }
+    }
+    .skills-list {
+      flex-grow: 1;
+    }
+  }
+  @media (min-width: 992px) {
+    .container {
+      .image {
+        display: block;
+      }
+    }
+  }
+}

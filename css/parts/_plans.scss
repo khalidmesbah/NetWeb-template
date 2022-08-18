@@ -1,0 +1,185 @@
+@use "variables" as *;
+@use "mixins" as *;
+.plans {
+  @include section-padding();
+  background: $sec-bg;
+  .container {
+    @include grid-fit();
+    gap: 30px;
+    position: relative;
+    z-index: 1;
+    &::after,
+    &::before {
+      position: absolute;
+      content: "";
+      background: transparent url("../images/dots.avif") no-repeat;
+      width: 204px;
+      height: 186px;
+      z-index: -1;
+    }
+    &::after {
+      top: -50px;
+      right: -110px;
+    }
+    &::before {
+      bottom: 100px;
+      left: -150px;
+    }
+    [data-lang="ar"] & {
+      &::after {
+        bottom: -50px;
+        right: -110px;
+        top: initial;
+      }
+      &::before {
+        top: 100px;
+        left: -150px;
+        bottom: initial;
+      }
+      & .wrapper li {
+        display: flex;
+      }
+      & .wrapper .label {
+        left: 20px;
+        right: initial;
+        transform: scale(-1);
+      }
+      & .wrapper .label::after {
+        position: absolute;
+        content: "";
+        border: 20px solid;
+        border-color: currentColor transparent transparent transparent;
+        transition: border-color 300ms;
+        top: 0;
+        left: 0;
+        transition: $main-transition;
+      }
+      & .wrapper.popular:hover .label::after {
+        border-color: currentColor transparent transparent transparent;
+      }
+    }
+    .wrapper {
+      position: relative;
+      box-shadow: 0 12px 20px 0 rgb(0 0 0 / 13%), 0 2px 4px 0 rgb(0 0 0 / 12%);
+      transition: $main-transition;
+      background: white;
+      text-align: center;
+      z-index: 1;
+      padding: 20px 0;
+      &::before,
+      &::after {
+        position: absolute;
+        content: "";
+        background: #dce1fa;
+        z-index: -1;
+        transition: $main-transition;
+      }
+      &::before {
+        top: 50%;
+        right: 0;
+        left: 100%;
+        bottom: 0;
+      }
+      &::after {
+        bottom: 50%;
+        top: 0;
+        right: 100%;
+        left: 0;
+      }
+      &:hover {
+        &::after {
+          right: 0;
+        }
+        &::before {
+          left: 0;
+        }
+      }
+      h3 {
+        font-weight: bold;
+        margin: 30px 0;
+        font-size: 25px;
+        letter-spacing: -1px;
+      }
+      img {
+        width: 80px;
+        margin-bottom: 30px;
+      }
+      .amount {
+        display: block;
+        font-size: 60px;
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: $main-clr;
+      }
+      .time {
+        color: #666;
+      }
+      menu {
+        text-align: left;
+        padding-top: 20px;
+      }
+      li {
+        padding: 20px;
+        border-top: 1px solid #eee;
+        &::before {
+          font-family: "Font Awesome 5 Free";
+          content: "\f00c";
+          margin-inline-end: 10px;
+          font-weight: 900;
+          color: $main-clr;
+        }
+      }
+      a {
+        display: block;
+        width: -moz-fit-content;
+        width: fit-content;
+        border: 2px solid $main-clr;
+        color: $main-clr;
+        margin: 30px auto 40px;
+        padding: 15px 20px;
+        border-radius: 6px;
+        font-weight: bold;
+        transition: $main-transition;
+        &:hover {
+          color: $main-bg;
+          background-color: $main-clr;
+        }
+      }
+      &.popular {
+        &:hover .label::after {
+          color: #dce1fa;
+        }
+      }
+      .label {
+        position: absolute;
+        top: 0;
+        right: 20px;
+        width: 40px;
+        padding-inline-start: 10px;
+        padding-inline-end: 35px;
+        padding-block-start: 10px;
+        padding-block-end: 10px;
+        background-color: $main-clr;
+        color: white;
+        font-weight: bold;
+        writing-mode: vertical-rl;
+        font-size: 18px;
+        &::after {
+          position: absolute;
+          content: "";
+          border: 20px solid;
+          color: $main-bg;
+          border-color: transparent transparent currentColor transparent;
+          transition: $main-transition;
+          bottom: 0;
+          left: 0;
+        }
+      }
+    }
+    @media (min-width: 993px) {
+      .wrapper.popular {
+        transform: translateY(-20px);
+      }
+    }
+  }
+}
