@@ -1,44 +1,50 @@
+/* Font Awesome Library */
+@use "font-awesome";
+
+/* Normalize */
+@use "normalize";
+
 /* Global Rules */
-@use "parts/global-rules";
+@use "layout/global-rules";
 
 /* Settings */
-@use "parts/settings";
+@use "layout/settings";
 
 /* Header */
-@use "parts/header";
+@use "layout/header";
 
 /* Main */
 // landing
-@use "parts/landing";
+@use "layout/landing";
 // articles
-@use "parts/articles";
+@use "layout/articles";
 // gallery
-@use "parts/gallery";
+@use "layout/gallery";
 // features
-@use "parts/features";
+@use "layout/features";
 // testimonials
-@use "parts/testimonials";
+@use "layout/testimonials";
 // team
-@use "parts/team";
+@use "layout/team";
 // services
-@use "parts/services";
+@use "layout/services";
 // skills
-@use "parts/skills";
+@use "layout/skills";
 // how it works
-@use "parts/how-it-works";
+@use "layout/how-it-works";
 // events
-@use "parts/events";
+@use "layout/events";
 // plans
-@use "parts/plans";
+@use "layout/plans";
 // videos
-@use "parts/videos";
+@use "layout/videos";
 // stats
-@use "parts/stats";
+@use "layout/stats";
 // discount
-@use "parts/discount";
+@use "layout/discount";
 
 /* Footer */
-@use "parts/footer";
+@use "layout/footer";
 
 /* dark mode */
-@use "parts/dark-mode";
+@use "layout/dark-mode";

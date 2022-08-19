@@ -39,11 +39,11 @@
         border-radius: 50%;
         background-color: #e7e7e7;
         z-index: -1;
-        transition: 600ms;
+        transition: 900ms;
         transform: scale(0);
       }
       &:hover::after {
-        transform: scale(15);
+        transform: scale(20);
       }
       img {
         max-width: 64px;

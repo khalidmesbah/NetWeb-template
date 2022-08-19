@@ -1,5 +1,18 @@
 @use "variables" as *;
 @use "mixins" as *;
+@mixin colorize($color) {
+  .image::before {
+    background: $color;
+  }
+  h2::after {
+    background: $color;
+  }
+  a {
+    border: 3px solid $color;
+    color: $color;
+    background-image: linear-gradient(90deg, $color 50%, 0, $main-bg);
+  }
+}
 .features {
   @include section-padding();
   background: $main-bg;
@@ -65,43 +78,14 @@
         background-position: right bottom;
         background-size: 200% 100%;
       }
-      &.quality {
-        .image::before {
-          background: #f44036;
-        }
-        h2::after {
-          background: #f44036;
-        }
-        a {
-          border: 3px solid #f44036;
-          color: #f44036;
-          background-image: linear-gradient(90deg, #f44036 50%, 0, $main-bg);
-        }
-      }
-      &.time {
-        .image::before {
-          background: #009688;
-        }
-        h2::after {
-          background: #009688;
-        }
-        a {
-          border: 3px solid #009688;
-          color: #009688;
-          background-image: linear-gradient(90deg, #009688 50%, 0, $main-bg);
-        }
-      }
-      &.passion {
-        .image::before {
-          background: #0088c8;
-        }
-        h2::after {
-          background: #0088c8;
-        }
-        a {
-          border: 3px solid #0088c8;
-          color: #0088c8;
-          background-image: linear-gradient(90deg, #0088c8 50%, 0, $main-bg);
+      $types: (
+        "quality": #f44036,
+        "time": #009688,
+        "passion": #0088c8,
+      );
+      @each $type, $color in $types {
+        &.#{$type} {
+          @include colorize($color);
         }
       }
       &:hover {

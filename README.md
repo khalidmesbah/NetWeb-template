@@ -3,6 +3,12 @@
 
 # About
 NetWeb Is Tech Company That Makes The Internet A Better Place
+<div align="center">
+
+![NetWeb](images/NetWeb.png)
+![chrome report](images/chrome-report.png)
+
+</div>
 
 # Features
 - Fixed Header
@@ -21,8 +27,6 @@ NetWeb Is Tech Company That Makes The Internet A Better Place
 - Scroll To Top When logo Is Clicked
 - Increase Numbers On Scrolling
 - Semantic HTML
-- PWA
-- 
 
 # Technologies
 - HTML
@@ -31,8 +35,6 @@ NetWeb Is Tech Company That Makes The Internet A Better Place
 - JavaScript
 - Font Awesome
 - Normalize.css
-
-minify the css again
 
 > ### Credit For [Elzero Web School](https://elzero.org/)
 
