@@ -62,7 +62,7 @@ header {
       opacity: 0;
       pointer-events: none;
       top: calc(100% + 30px);
-      .image {
+      .img {
         min-width: 330px;
         display: none;
         img {
@@ -138,12 +138,12 @@ header {
     }
   }
   @media (min-width: 992px) {
-    .container .mega-menu .image {
+    .container .mega-menu .img {
       display: block;
     }
   }
   @media (min-width: 1200px) {
-    .container .mega-menu .image {
+    .container .mega-menu .img {
       min-width: 523px;
     }
   }

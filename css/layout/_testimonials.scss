@@ -27,6 +27,9 @@
           right: initial;
         }
       }
+      h3 {
+        width: calc(100% - 50px);
+      }
       .title {
         color: #333;
         display: block;

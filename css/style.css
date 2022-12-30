@@ -6745,11 +6745,11 @@ header .container .mega-menu {
   border-top: 1px solid #e9e6e6;
   transition: top 300ms, opacity 300ms;
 }
-header .container .mega-menu .image {
+header .container .mega-menu .img {
   min-width: 330px;
   display: none;
 }
-header .container .mega-menu .image img {
+header .container .mega-menu .img img {
   max-height: 100%;
   width: 100%;
 }
@@ -6822,12 +6822,12 @@ header .container .mega-menu-active {
   }
 }
 @media (min-width: 992px) {
-  header .container .mega-menu .image {
+  header .container .mega-menu .img {
     display: block;
   }
 }
 @media (min-width: 1200px) {
-  header .container .mega-menu .image {
+  header .container .mega-menu .img {
     min-width: 523px;
   }
 }
@@ -6890,10 +6890,10 @@ header .container .mega-menu-active {
   line-height: 1.7;
   margin: 10px;
 }
-.landing .container .image {
+.landing .container .img {
   display: none;
 }
-.landing .container .image img {
+.landing .container .img img {
   width: 600px;
   min-width: 600px;
   position: relative;
@@ -6972,7 +6972,7 @@ header .container .mega-menu-active {
     margin: 0;
     margin-top: 5px;
   }
-  .landing .container .image {
+  .landing .container .img {
     display: block;
   }
 }
@@ -7272,6 +7272,9 @@ header .container .mega-menu-active {
   left: -10px;
   right: initial;
 }
+.testimonials .container .wrapper h3 {
+  width: calc(100% - 50px);
+}
 .testimonials .container .wrapper .title {
   color: #333;
   display: block;
@@ -7522,10 +7525,10 @@ header .container .mega-menu-active {
 [data-lang=ar] .skills .container .skill .progress-bar .fill {
   right: 0;
 }
-[data-lang=ar] .skills .container .image {
+[data-lang=ar] .skills .container .img {
   transform: scaleX(-1);
 }
-.skills .container .image {
+.skills .container .img {
   width: 500px;
   display: none;
 }
@@ -7567,7 +7570,7 @@ header .container .mega-menu-active {
   flex-grow: 1;
 }
 @media (min-width: 992px) {
-  .skills .container .image {
+  .skills .container .img {
     display: block;
   }
 }
@@ -7590,11 +7593,11 @@ header .container .mega-menu-active {
     text-align: right;
   }
 }
-.how-it-works .container .image {
+.how-it-works .container .img {
   text-align: center;
   width: 100%;
 }
-.how-it-works .container .image img {
+.how-it-works .container .img img {
   max-width: 450px;
   margin-bottom: 50px;
 }
@@ -7658,7 +7661,7 @@ header .container .mega-menu-active {
     flex-direction: row;
     align-items: center;
   }
-  .how-it-works .container .image img {
+  .how-it-works .container .img img {
     -webkit-margin-end: 80px;
             margin-inline-end: 80px;
     margin-bottom: 0;

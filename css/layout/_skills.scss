@@ -9,11 +9,11 @@
       .skill .progress-bar .fill {
         right: 0;
       }
-      .image {
+      .img {
         transform: scaleX(-1);
       }
     }
-    .image {
+    .img {
       width: 500px;
       display: none;
     }
@@ -52,7 +52,7 @@
   }
   @media (min-width: 992px) {
     .container {
-      .image {
+      .img {
         display: block;
       }
     }
